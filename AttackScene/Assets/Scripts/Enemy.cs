@@ -31,12 +31,20 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void GetHit(Vector2 direction)
+    public void GetHit(Vector2 direction, int damage)
     {
         transform.localScale = new Vector3(-direction.x, 1, 1);
         isHit = true;
-        this.direction = direction; ;
+
+        gameObject.GetComponent<FSM>().parameter.getHit = true;
+        gameObject.GetComponent<FSM>().parameter.health -= damage;
+
+        this.direction = direction;
         animator.SetTrigger("Hit");
         hitAnimator.SetTrigger("Hit");
+    }
+
+    public void destory(){
+        Destroy(gameObject);
     }
 }
