@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,14 +14,12 @@ public class PlayerController : MonoBehaviour
     public float lightStrength;
     public int heavyPause;
     public float heavyStrength;
-
     [Space]
     public float interval = 2f;
     private float timer;
     private bool isAttack;
     private string attackType;
     private int comboStep;
-
     public float moveSpeed;
     public float duckSpeed;
     public float jumpForce;
@@ -29,27 +28,32 @@ public class PlayerController : MonoBehaviour
     private float input;
     private bool isGround;
     [SerializeField] private LayerMask layer;
-
     [SerializeField] private Vector3 check;
-
     public int lightDamage = 1;
     public int heavyDamage = 2;
-
     public Transform worldBoundaryLeft,worldBoundaryRight;
-
     private bool isDuck;
-
     private bool ableToDuck = true;
     public float slowAirSpeed;
     private bool bonusTime = false;
     private bool isBonus = false;
     private int attackReinfore = 1;
     private bool bonusActive = true;
+    private bool isHurt = false;
+    private bool defenseTime = false;
+    private bool isDefense = false;
+    public float health = 3;
+    public float mana = 3;
+
+    public GameObject healthSystem;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        healthSystem.GetComponent<HealthSystem>().setHealth(health);
+        healthSystem.GetComponent<HealthSystem>().setMana(mana);
+        healthSystem.GetComponent<HealthSystem>().UpdateGraphics();
     }
 
     void Update()
@@ -62,7 +66,6 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Horizontal", rigidbody.velocity.x);
         animator.SetFloat("Vertical", rigidbody.velocity.y);
         animator.SetBool("isGround", isGround);
-
         Move();
         Attack();
     }
@@ -72,6 +75,15 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown("l")){
             if (!isDuck && ableToDuck)
             {
+                if(isHurt && defenseTime){
+                    isDefense = true;
+                    defenseTime = false;
+                    transform.Find("defense").gameObject.SetActive(true);
+                    transform.Find("defense").GetComponent<Animator>().Play("Hit");
+                    isHurt = false;
+                    animator.SetBool("Hurt",false);
+                    rigidbody.constraints = RigidbodyConstraints2D.None;
+                }
                 if(bonusActive && bonusTime && !isBonus){
                     isBonus = true;
                 }
@@ -90,10 +102,11 @@ public class PlayerController : MonoBehaviour
                 }
             }
             bonusActive = false;
+            defenseTime = false;
         }
 
         if (!isAttack){
-            if(!isDuck){
+            if(!isDuck && !isHurt){
                 rigidbody.velocity = new Vector2(input * moveSpeed,  rigidbody.velocity.y);
             }
         }
@@ -111,9 +124,9 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Jump");
         }
 
-        if (rigidbody.velocity.x < -0.1f)
+        if (rigidbody.velocity.x < -0.1f && !isHurt)
             transform.localScale = new Vector3(-1, 1, 1);
-        else if (rigidbody.velocity.x > 0.1f)
+        else if (rigidbody.velocity.x > 0.1f && !isHurt)
             transform.localScale = new Vector3(1, 1, 1);
 
         transform.position = new Vector2(Mathf.Clamp(transform.position.x,worldBoundaryLeft.position.x,worldBoundaryRight.position.x),transform.position.y);
@@ -203,7 +216,10 @@ public class PlayerController : MonoBehaviour
                 other.GetComponent<Enemy>().GetHit(Vector2.left,damage);
         }
         if(other.CompareTag("EnemyAttack")){
-            getHit();
+            if(!isDefense){
+                getHit();
+            }
+            
         }
     }
 
@@ -240,13 +256,45 @@ public class PlayerController : MonoBehaviour
     }
 
     public void getHit(){
-        animator.SetBool("Hurt",true);
+        isHurt = true;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+        animator.SetBool("Hurt",true);
     }
 
     public void resolveHurt(){
+        isHurt = false;
         animator.SetBool("Hurt",false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
+    }
+
+    public void startDefenseTime(){
+        defenseTime = true;
+    }
+
+    public void closeDefenseTime(){
+        defenseTime = false;
+    }
+
+    public void unableDefense(){
+        isDefense = false;
+    }
+
+    private void restart(){
+        //重新激活当前场景
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    private void startover(){
+        Invoke("restart",.2f);
+    }
+
+    public void callStartOver(){
+        startover();
+    }
+
+    public void getDamage(){
+        //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
+        healthSystem.GetComponent<HealthSystem>().TakeDamage(1f);
     }
 
 }

@@ -484,14 +484,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.13333334
-    functionName: AttackOver
+    functionName: setAbleToDuck
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.13333334
-    functionName: setAbleToDuck
+    functionName: AttackOver
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -48,5 +48,12 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public void callStartDefenseTime(){
+        GameObject.Find("Player").GetComponent<PlayerController>().startDefenseTime();
+    }
+
+    public void callCloseDefenseTime(){
+        GameObject.Find("Player").GetComponent<PlayerController>().closeDefenseTime();
+    }
     
 }
