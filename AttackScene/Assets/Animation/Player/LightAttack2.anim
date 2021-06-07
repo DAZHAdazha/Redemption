@@ -205,23 +205,17 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: -7055323331289151167, guid: 3f9c15f6143b9b64f857a99c4ef40301,
-        type: 3}
+      value: {fileID: -7055323331289151167, guid: 3f9c15f6143b9b64f857a99c4ef40301, type: 3}
     - time: 0.06666667
-      value: {fileID: -7579131958595101662, guid: 3f9c15f6143b9b64f857a99c4ef40301,
-        type: 3}
+      value: {fileID: -7579131958595101662, guid: 3f9c15f6143b9b64f857a99c4ef40301, type: 3}
     - time: 0.13333334
-      value: {fileID: 488254437912105219, guid: 3f9c15f6143b9b64f857a99c4ef40301,
-        type: 3}
+      value: {fileID: 488254437912105219, guid: 3f9c15f6143b9b64f857a99c4ef40301, type: 3}
     - time: 0.2
-      value: {fileID: 7724369986690269094, guid: 3f9c15f6143b9b64f857a99c4ef40301,
-        type: 3}
+      value: {fileID: 7724369986690269094, guid: 3f9c15f6143b9b64f857a99c4ef40301, type: 3}
     - time: 0.26666668
-      value: {fileID: 988850007847005027, guid: 3f9c15f6143b9b64f857a99c4ef40301,
-        type: 3}
+      value: {fileID: 988850007847005027, guid: 3f9c15f6143b9b64f857a99c4ef40301, type: 3}
     - time: 0.33333334
-      value: {fileID: -2892395020009413503, guid: 3f9c15f6143b9b64f857a99c4ef40301,
-        type: 3}
+      value: {fileID: -2892395020009413503, guid: 3f9c15f6143b9b64f857a99c4ef40301, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -493,7 +487,21 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.25
+    functionName: setAbleToDuck
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
     functionName: AttackOver
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.33333334
+    functionName: bonusTimeOver
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

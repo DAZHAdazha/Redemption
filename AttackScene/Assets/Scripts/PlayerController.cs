@@ -74,8 +74,11 @@ public class PlayerController : MonoBehaviour
             {
                 if(bonusActive && bonusTime && !isBonus){
                     isBonus = true;
-                    transform.Find("Bonus").gameObject.SetActive(true);
+                }
+                if(isBonus){
                     transform.GetComponent<SpriteRenderer>().color = new Color32(255,81,81,255);
+                    transform.Find("Bonus").gameObject.SetActive(false);
+                    transform.Find("BonusDuck").gameObject.SetActive(true);
                 }
                 isAttack = false;
                 isDuck = true;
@@ -199,6 +202,9 @@ public class PlayerController : MonoBehaviour
             else if (transform.localScale.x < 0)
                 other.GetComponent<Enemy>().GetHit(Vector2.left,damage);
         }
+        if(other.CompareTag("EnemyAttack")){
+            getHit();
+        }
     }
 
     private void OnDrawGizmos()
@@ -210,6 +216,10 @@ public class PlayerController : MonoBehaviour
         isDuck = false;
         animator.SetBool("Duck",false);
         rigidbody.isKinematic = false;
+        transform.Find("BonusDuck").gameObject.SetActive(false);
+        if(isBonus){
+            transform.Find("Bonus").gameObject.SetActive(true);
+        }
     }
 
     public void setAbleToDuck(){
@@ -223,8 +233,20 @@ public class PlayerController : MonoBehaviour
     }
 
     private void setBonusVisible(){
-        transform.Find("Bonus").gameObject.SetActive(false);
-        transform.GetComponent<SpriteRenderer>().color = new Color32(255,255,255,255);
+        if(!isBonus){
+            transform.Find("Bonus").gameObject.SetActive(false);
+            transform.GetComponent<SpriteRenderer>().color = new Color32(255,255,255,255);
+        }
+    }
+
+    public void getHit(){
+        animator.SetBool("Hurt",true);
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
+    }
+
+    public void resolveHurt(){
+        animator.SetBool("Hurt",false);
+        rigidbody.constraints = RigidbodyConstraints2D.None;
     }
 
 }

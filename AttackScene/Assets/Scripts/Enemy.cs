@@ -47,4 +47,6 @@ public class Enemy : MonoBehaviour
     public void destory(){
         Destroy(gameObject);
     }
+
+    
 }
