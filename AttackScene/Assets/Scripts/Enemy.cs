@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private Animator hitAnimator;
     new private Rigidbody2D rigidbody;
+    public GameObject health;
 
     void Start()
     {
@@ -36,8 +37,14 @@ public class Enemy : MonoBehaviour
         transform.localScale = new Vector3(-direction.x, 1, 1);
         isHit = true;
 
+        //！！！可优化 把敌人的参数位置移动一下
         gameObject.GetComponent<FSM>().parameter.getHit = true;
         gameObject.GetComponent<FSM>().parameter.health -= damage;
+        if(gameObject.GetComponent<FSM>().parameter.health<0){
+            gameObject.GetComponent<FSM>().parameter.health = 0;
+        }
+
+        health.GetComponent<health>().callUpdateHealth();
 
         this.direction = direction;
         animator.SetTrigger("Hit");
@@ -45,6 +52,7 @@ public class Enemy : MonoBehaviour
     }
 
     public void destory(){
+        Destroy(health.transform.parent.gameObject);
         Destroy(gameObject);
     }
 

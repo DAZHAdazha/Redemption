@@ -44,8 +44,8 @@ public class PlayerController : MonoBehaviour
     private bool isDefense = false;
     public float health = 3;
     public float mana = 3;
-
     public GameObject healthSystem;
+    public bool isStop = false;
 
     void Start()
     {
@@ -66,8 +66,11 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Horizontal", rigidbody.velocity.x);
         animator.SetFloat("Vertical", rigidbody.velocity.y);
         animator.SetBool("isGround", isGround);
-        Move();
+        if(!isStop){
+            Move();
         Attack();
+        }
+        
     }
 
     void Move()
