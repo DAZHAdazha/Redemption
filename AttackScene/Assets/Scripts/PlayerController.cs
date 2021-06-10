@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public float mana = 3;
     public GameObject healthSystem;
     public bool isStop = false;
-
+    private ScreenFlash screenFlash;    
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
         healthSystem.GetComponent<HealthSystem>().setHealth(health);
         healthSystem.GetComponent<HealthSystem>().setMana(mana);
         healthSystem.GetComponent<HealthSystem>().UpdateGraphics();
+        screenFlash = GetComponent<ScreenFlash>();
     }
 
     void Update()
@@ -198,6 +199,10 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         int damage = 0;
+        bool isCritical = false;
+        if(attackReinfore>1){
+            isCritical = true;
+        }
         if (other.CompareTag("Enemy"))
         {
             if (attackType == "Light")
@@ -214,15 +219,14 @@ public class PlayerController : MonoBehaviour
             }
 
             if (transform.localScale.x > 0)
-                other.GetComponent<Enemy>().GetHit(Vector2.right,damage);
+                other.GetComponent<Enemy>().GetHit(Vector2.right,damage,isCritical);
             else if (transform.localScale.x < 0)
-                other.GetComponent<Enemy>().GetHit(Vector2.left,damage);
+                other.GetComponent<Enemy>().GetHit(Vector2.left,damage,isCritical);
         }
         if(other.CompareTag("EnemyAttack")){
             if(!isDefense){
                 getHit();
             }
-            
         }
     }
 
@@ -268,6 +272,10 @@ public class PlayerController : MonoBehaviour
         isHurt = false;
         animator.SetBool("Hurt",false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
+        if(!animator.GetBool("isGround")){
+            transform.localPosition = new Vector2(transform.localPosition.x,transform.localPosition.y + 0.001f);
+        }
+        
     }
 
     public void startDefenseTime(){
@@ -297,6 +305,7 @@ public class PlayerController : MonoBehaviour
 
     public void getDamage(){
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
+        screenFlash.FlashScreen();
         healthSystem.GetComponent<HealthSystem>().TakeDamage(1f);
     }
 
