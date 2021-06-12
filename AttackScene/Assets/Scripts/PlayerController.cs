@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
     private ScreenFlash screenFlash;
     private bool isOneWayPlatform;
     public float restoreTime;
+    
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -126,10 +127,22 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            if (attackType == "Light")
-                rigidbody.velocity = new Vector2(transform.localScale.x * lightSpeed, rigidbody.velocity.y * slowAirSpeed);
-            else if (attackType == "Heavy")
-                rigidbody.velocity = new Vector2(transform.localScale.x * heavySpeed, rigidbody.velocity.y * slowAirSpeed);
+            if (attackType == "Light"){
+                if(gameObject.layer == LayerMask.NameToLayer("Player")){
+                    rigidbody.velocity = new Vector2(transform.localScale.x * lightSpeed, rigidbody.velocity.y * slowAirSpeed);
+                }else{
+                    //在DropFromOneWay layer时攻击velocity不会慢下落
+                    rigidbody.velocity = new Vector2(transform.localScale.x * lightSpeed, rigidbody.velocity.y);
+                }
+            }
+            else if (attackType == "Heavy"){
+                if(gameObject.layer == LayerMask.NameToLayer("Player")){
+                    rigidbody.velocity = new Vector2(transform.localScale.x * heavySpeed, rigidbody.velocity.y * slowAirSpeed);
+                }else{
+                    //在DropFromOneWay layer时攻击velocity不会慢下落
+                    rigidbody.velocity = new Vector2(transform.localScale.x * heavySpeed, rigidbody.velocity.y);
+                }
+            }
         }
 
         
@@ -324,7 +337,7 @@ public class PlayerController : MonoBehaviour
     private bool oneWayPlatformDrop(){
         float moveY = Input.GetAxis("Vertical");
         if(isOneWayPlatform && moveY < -0.1f && Input.GetButtonDown("Jump")){
-            gameObject.layer =LayerMask.NameToLayer("DropFromOneWay");
+            gameObject.layer = LayerMask.NameToLayer("DropFromOneWay");
             Invoke("restorePlayer",restoreTime);
             return true;
         }
@@ -332,7 +345,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void restorePlayer(){
-        gameObject.layer =LayerMask.NameToLayer("Player");
+        gameObject.layer = LayerMask.NameToLayer("Player");
     }
 
 }
