@@ -27,7 +27,7 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private float input;
     private bool isGround;
-    [SerializeField] private LayerMask layer;
+    public LayerMask[] layers;
     [SerializeField] private Vector3 check;
     public int lightDamage = 1;
     public int heavyDamage = 2;
@@ -46,7 +46,9 @@ public class PlayerController : MonoBehaviour
     public float mana = 3;
     public GameObject healthSystem;
     public bool isStop = false;
-    private ScreenFlash screenFlash;    
+    private ScreenFlash screenFlash;
+    private bool isOneWayPlatform;
+    public float restoreTime;
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -60,7 +62,15 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         input = Input.GetAxisRaw("Horizontal");
-        isGround = Physics2D.OverlapCircle(transform.position + new Vector3(check.x, check.y, 0), check.z, layer);
+        //layer中oneWayPlatform的index为1
+        isOneWayPlatform = Physics2D.OverlapCircle(transform.position + new Vector3(check.x, check.y, 0), check.z, layers[1]);
+        if(isOneWayPlatform){
+            isGround = true;
+        }else{
+            //layer中Ground的index为0
+            isGround = Physics2D.OverlapCircle(transform.position + new Vector3(check.x, check.y, 0), check.z, layers[0]);
+        }
+
         if(isGround && !ableToDuck && !isAttack){
             ableToDuck = true;
         }
@@ -69,7 +79,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isGround", isGround);
         if(!isStop){
             Move();
-        Attack();
+            Attack();
         }
         
     }
@@ -77,7 +87,7 @@ public class PlayerController : MonoBehaviour
     void Move()
     {
         if(Input.GetKeyDown("l")){
-            if (!isDuck && ableToDuck)
+            if (!isDuck && isGround && ableToDuck)
             {
                 if(isHurt && defenseTime){
                     isDefense = true;
@@ -122,7 +132,9 @@ public class PlayerController : MonoBehaviour
                 rigidbody.velocity = new Vector2(transform.localScale.x * heavySpeed, rigidbody.velocity.y * slowAirSpeed);
         }
 
-        if (Input.GetButtonDown("Jump") && isGround && !isDuck)
+        
+
+        if (!oneWayPlatformDrop() && Input.GetButtonDown("Jump") && isGround && !isDuck)
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
             animator.SetTrigger("Jump");
@@ -307,6 +319,20 @@ public class PlayerController : MonoBehaviour
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
         screenFlash.FlashScreen();
         healthSystem.GetComponent<HealthSystem>().TakeDamage(1f);
+    }
+
+    private bool oneWayPlatformDrop(){
+        float moveY = Input.GetAxis("Vertical");
+        if(isOneWayPlatform && moveY < -0.1f && Input.GetButtonDown("Jump")){
+            gameObject.layer =LayerMask.NameToLayer("DropFromOneWay");
+            Invoke("restorePlayer",restoreTime);
+            return true;
+        }
+        return false;
+    }
+
+    private void restorePlayer(){
+        gameObject.layer =LayerMask.NameToLayer("Player");
     }
 
 }
