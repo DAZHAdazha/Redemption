@@ -922,6 +922,7 @@ GameObject:
   - component: {fileID: 272548078}
   - component: {fileID: 272548077}
   - component: {fileID: 272548079}
+  - component: {fileID: 272548080}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -969,7 +970,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 9ab9e02ff95537148b5c85aa77586875, type: 3}
     m_FontSize: 33
     m_FontStyle: 0
     m_BestFit: 0
@@ -981,7 +982,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: English
+  m_Text: "\u82F1\u8BED"
 --- !u!222 &272548078
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1004,6 +1005,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: EnglishToggle
   FallbackText: English
+--- !u!114 &272548080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272548075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce53ba05f9c84246b062afd12f4619f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: EnglishToggle
+  FallbackFont: {fileID: 12800000, guid: 9ab9e02ff95537148b5c85aa77586875, type: 3}
 --- !u!1 &280981642
 GameObject:
   m_ObjectHideFlags: 0
@@ -1676,7 +1691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 806f0696300aeac44a0e17efee222854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentLanguage: English
+  currentLanguage: Chinese
   detectLanguage: 1
   defaultLanguage: English
   saveLoad: 1
@@ -2165,6 +2180,7 @@ GameObject:
   - component: {fileID: 683672319}
   - component: {fileID: 683672318}
   - component: {fileID: 683672320}
+  - component: {fileID: 683672321}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -2212,7 +2228,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 9ab9e02ff95537148b5c85aa77586875, type: 3}
     m_FontSize: 33
     m_FontStyle: 0
     m_BestFit: 0
@@ -2224,7 +2240,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Chinese
+  m_Text: "\u4E2D\u6587"
 --- !u!222 &683672319
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2247,6 +2263,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   translationName: ChineseToggle
   FallbackText: Chinese
+--- !u!114 &683672321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 683672316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fce53ba05f9c84246b062afd12f4619f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  translationName: ChineseToggle
+  FallbackFont: {fileID: 12800000, guid: 9ab9e02ff95537148b5c85aa77586875, type: 3}
 --- !u!1 &770005253
 GameObject:
   m_ObjectHideFlags: 0
