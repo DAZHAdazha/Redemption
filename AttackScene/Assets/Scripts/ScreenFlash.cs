@@ -8,6 +8,9 @@ public class ScreenFlash : MonoBehaviour
     public Image img;
     public float time;
     public Color flashColor;
+
+
+
     private Color defaultColor;
     // Start is called before the first frame update
     void Start()

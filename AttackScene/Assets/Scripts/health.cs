@@ -9,10 +9,14 @@ public class health : MonoBehaviour
     public TextMeshProUGUI healthText;
     public static int healthCurrent;
     public static int healthMax;
-    private Image healthBar;
-    public GameObject enemy;
-    private Vector2 currentPosition;
     public GameObject healthBarObject;
+    public GameObject enemy;
+
+
+
+    private Vector2 currentPosition;
+    private Image healthBar;
+    
     void Start()
     {
         healthBar = GetComponent<Image>();

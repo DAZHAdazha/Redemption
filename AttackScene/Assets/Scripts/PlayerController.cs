@@ -16,22 +16,30 @@ public class PlayerController : MonoBehaviour
     public float heavyStrength;
     [Space]
     public float interval = 2f;
+    public float moveSpeed;
+    public float duckSpeed;
+    public float jumpForce;
+    public LayerMask[] layers;
+    public int lightDamage = 1;
+    public int heavyDamage = 2;
+    public Transform worldBoundaryLeft,worldBoundaryRight;
+    public float health = 3;
+    public float mana = 3;
+    public GameObject healthSystem;
+    public bool isStop = false;
+    public float restoreTime;
+    public bool isMovingPlatform;
+
+
     private float timer;
     private bool isAttack;
     private string attackType;
     private int comboStep;
-    public float moveSpeed;
-    public float duckSpeed;
-    public float jumpForce;
     new private Rigidbody2D rigidbody;
     private Animator animator;
     private float input;
     private bool isGround;
-    public LayerMask[] layers;
     [SerializeField] private Vector3 check;
-    public int lightDamage = 1;
-    public int heavyDamage = 2;
-    public Transform worldBoundaryLeft,worldBoundaryRight;
     private bool isDuck;
     private bool ableToDuck = true;
     public float slowAirSpeed;
@@ -42,13 +50,8 @@ public class PlayerController : MonoBehaviour
     private bool isHurt = false;
     private bool defenseTime = false;
     private bool isDefense = false;
-    public float health = 3;
-    public float mana = 3;
-    public GameObject healthSystem;
-    public bool isStop = false;
     private ScreenFlash screenFlash;
     private bool isOneWayPlatform;
-    public float restoreTime;
     
     void Start()
     {
@@ -62,6 +65,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        updateFunction();
+    }
+
+    private void updateFunction(){
         input = Input.GetAxisRaw("Horizontal");
         //layer中oneWayPlatform的index为1
         isOneWayPlatform = Physics2D.OverlapCircle(transform.position + new Vector3(check.x, check.y, 0), check.z, layers[1]);
@@ -82,7 +89,6 @@ public class PlayerController : MonoBehaviour
             Move();
             Attack();
         }
-        
     }
 
     void Move()

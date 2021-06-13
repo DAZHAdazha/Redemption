@@ -5,15 +5,18 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float speed;
+    public GameObject health;
+    public GameObject floatPoint;
+
+
+
     private Vector2 direction;
     private bool isHit;
     private AnimatorStateInfo info;
-
     private Animator animator;
     private Animator hitAnimator;
     new private Rigidbody2D rigidbody;
-    public GameObject health;
-    public GameObject floatPoint;
+    
 
     void Start()
     {
