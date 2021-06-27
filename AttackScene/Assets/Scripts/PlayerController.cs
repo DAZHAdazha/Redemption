@@ -37,7 +37,6 @@ public class PlayerController : MonoBehaviour
     private int comboStep;
     new private Rigidbody2D rigidbody;
     private Animator animator;
-    private float input;
     private bool isGround;
     [SerializeField] private Vector3 check;
     private bool isDuck;
@@ -51,7 +50,26 @@ public class PlayerController : MonoBehaviour
     private bool defenseTime = false;
     private bool isDefense = false;
     private ScreenFlash screenFlash;
-    private bool isOneWayPlatform;
+    private bool isOneWayPlatform; 
+    private PlayerInputActions controls;
+    private Vector2 move;
+
+    private void Awake() {
+
+        //支持手柄
+        controls = new PlayerInputActions();
+
+        controls.GamePlay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();
+        controls.GamePlay.Move.canceled += ctx => move = Vector2.zero;
+    }
+
+    void OnEnable(){
+        controls.GamePlay.Enable();
+    }
+
+    void OnDisable(){
+        controls.GamePlay.Disable();
+    }
     
     void Start()
     {
@@ -69,7 +87,6 @@ public class PlayerController : MonoBehaviour
     }
 
     private void updateFunction(){
-        input = Input.GetAxisRaw("Horizontal");
         //layer中oneWayPlatform的index为1
         isOneWayPlatform = Physics2D.OverlapCircle(transform.position + new Vector3(check.x, check.y, 0), check.z, layers[1]);
         if(isOneWayPlatform){
@@ -93,7 +110,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if(Input.GetKeyDown("l")){
+        if(controls.GamePlay.Duck.triggered){
             if (!isDuck && isGround && ableToDuck)
             {
                 if(isHurt && defenseTime){
@@ -128,7 +145,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isAttack){
             if(!isDuck && !isHurt){
-                rigidbody.velocity = new Vector2(input * moveSpeed,  rigidbody.velocity.y);
+                rigidbody.velocity = new Vector2(move.x * moveSpeed,  rigidbody.velocity.y);
             }
         }
         else
@@ -151,9 +168,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        
-
-        if (!oneWayPlatformDrop() && Input.GetButtonDown("Jump") && isGround && !isDuck)
+        if (!oneWayPlatformDrop() && controls.GamePlay.Jump.triggered && isGround && !isDuck)
         {
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
             animator.SetTrigger("Jump");
@@ -169,7 +184,7 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if (Input.GetKeyDown("j") && !isAttack && !isDuck)
+        if (controls.GamePlay.LightAttack.triggered && !isAttack && !isDuck)
         {
             bonusActive = true;
             if(isBonus){
@@ -189,7 +204,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("LightAttack");
             animator.SetInteger("ComboStep", comboStep);
         }
-        if (Input.GetKeyDown("k") && !isAttack && !isDuck)
+        if (controls.GamePlay.HeavyAttack.triggered && !isAttack && !isDuck)
         {
             bonusActive = true;
             if(isBonus){
@@ -341,8 +356,8 @@ public class PlayerController : MonoBehaviour
     }
 
     private bool oneWayPlatformDrop(){
-        float moveY = Input.GetAxis("Vertical");
-        if(isOneWayPlatform && moveY < -0.1f && Input.GetButtonDown("Jump")){
+        float moveY = move.y;
+        if(isOneWayPlatform && moveY < -0.1f && controls.GamePlay.Jump.triggered){
             gameObject.layer = LayerMask.NameToLayer("DropFromOneWay");
             Invoke("restorePlayer",restoreTime);
             return true;
