@@ -29,6 +29,10 @@ public class PlayerController : MonoBehaviour
     public bool isStop = false;
     public float restoreTime;
     public bool isMovingPlatform;
+    public float hitboxTime = 1.2f;
+    public int numBlinks = 3;
+    public float blinkTime = 0.1f;
+    public bool isDefense = false;
 
 
     private float timer;
@@ -48,11 +52,12 @@ public class PlayerController : MonoBehaviour
     private bool bonusActive = true;
     private bool isHurt = false;
     private bool defenseTime = false;
-    private bool isDefense = false;
     private ScreenFlash screenFlash;
     private bool isOneWayPlatform; 
     private PlayerInputActions controls;
     private Vector2 move;
+    private PolygonCollider2D polygonCollider2D;
+    private Renderer myRender;
 
     private void Awake() {
 
@@ -79,6 +84,8 @@ public class PlayerController : MonoBehaviour
         healthSystem.GetComponent<HealthSystem>().setMana(mana);
         healthSystem.GetComponent<HealthSystem>().UpdateGraphics();
         screenFlash = GetComponent<ScreenFlash>();
+        polygonCollider2D = GetComponent<PolygonCollider2D>();
+        myRender = GetComponent<Renderer>();
     }
 
     void Update()
@@ -124,8 +131,6 @@ public class PlayerController : MonoBehaviour
                 }
                 if(bonusActive && bonusTime && !isBonus){
                     isBonus = true;
-                }
-                if(isBonus){
                     transform.GetComponent<SpriteRenderer>().color = new Color32(255,81,81,255);
                     transform.Find("Bonus").gameObject.SetActive(false);
                     transform.Find("BonusDuck").gameObject.SetActive(true);
@@ -318,6 +323,7 @@ public class PlayerController : MonoBehaviour
         isHurt = false;
         animator.SetBool("Hurt",false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
         if(!animator.GetBool("isGround")){
             transform.localPosition = new Vector2(transform.localPosition.x,transform.localPosition.y + 0.001f);
         }
@@ -349,10 +355,17 @@ public class PlayerController : MonoBehaviour
         startover();
     }
 
-    public void getDamage(){
+    public void getDamage(float damage = 1f){
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
         screenFlash.FlashScreen();
-        healthSystem.GetComponent<HealthSystem>().TakeDamage(1f);
+        healthSystem.GetComponent<HealthSystem>().TakeDamage(damage);
+        polygonCollider2D.enabled = false;
+        StartCoroutine("showPlayerHitbox");
+    }
+
+    IEnumerator showPlayerHitbox(){
+        yield return new WaitForSeconds(hitboxTime);
+        polygonCollider2D.enabled = true;
     }
 
     private bool oneWayPlatformDrop(){
@@ -367,6 +380,18 @@ public class PlayerController : MonoBehaviour
 
     private void restorePlayer(){
         gameObject.layer = LayerMask.NameToLayer("Player");
+    }
+
+    public void blinkPlayer(){
+        StartCoroutine(blink(numBlinks,blinkTime));
+    }
+
+    IEnumerator blink(int numBlinks, float seconds){
+        for(int i=0;i<numBlinks * 2;i++){
+            myRender.enabled = !myRender.enabled;
+            yield return new WaitForSeconds(seconds);
+        }
+        myRender.enabled = true;
     }
 
 }
