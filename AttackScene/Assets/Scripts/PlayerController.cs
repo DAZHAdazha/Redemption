@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     public int numBlinks = 3;
     public float blinkTime = 0.1f;
     public bool isDefense = false;
+    public Vector3 check;
 
 
     private float timer;
@@ -42,7 +43,6 @@ public class PlayerController : MonoBehaviour
     new private Rigidbody2D rigidbody;
     private Animator animator;
     private bool isGround;
-    [SerializeField] private Vector3 check;
     private bool isDuck;
     private bool ableToDuck = true;
     public float slowAirSpeed;

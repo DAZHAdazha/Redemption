@@ -2,20 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Spike : MonoBehaviour
+public class TriggerBox : MonoBehaviour
 {
-    public float damage = 1f;
+    public float damage;
+    public float destoryTime;
 
     private PlayerController playerController;
-    
-
     // Start is called before the first frame update
     void Start()
     {
         playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        Destroy(gameObject,destoryTime);//销毁碰撞框
     }
 
-    // Update is called once per fram
+    // Update is called once per frame
 
     private void OnTriggerEnter2D(Collider2D other) { 
         //注意这里Player物体只能有一个Player Tag （子物体不能使用Player tag） 否则伤害会触发多次
@@ -24,7 +24,4 @@ public class Spike : MonoBehaviour
             playerController.blinkPlayer();
         }
     }
-
-
-        
 }
