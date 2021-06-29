@@ -44,6 +44,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "EnterDoor",
+                    "type": "Button",
+                    "id": "8c872f2d-13be-418d-9314-404868295a80",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -506,6 +514,17 @@
                     "processors": "",
                     "groups": "XBOX",
                     "action": "Duck",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d9ae324-7787-421f-a103-0ece6cb794a9",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "EnterDoor",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
