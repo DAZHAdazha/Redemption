@@ -55,9 +55,12 @@ public class DoorEnter : MonoBehaviour
         }
     }
 
-    void changePosition(){
-        playerTransform.position = backDoor.position;
+    void popAnim(){
         otherAnim.SetTrigger("Pop");
+    }
+    void changePosition(){
+        
+        playerTransform.position = backDoor.position;
     }
 
     void resumePlayer(){
