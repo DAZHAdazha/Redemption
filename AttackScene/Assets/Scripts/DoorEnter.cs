@@ -48,7 +48,6 @@ public class DoorEnter : MonoBehaviour
     }
 
     void enterDoor(){
-        Debug.Log("here");
         if(isDoor){
             anim.SetTrigger("Suck");
             playerTransform.gameObject.SetActive(false);

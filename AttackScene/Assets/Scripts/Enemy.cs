@@ -7,8 +7,7 @@ public class Enemy : MonoBehaviour
     public float speed;
     public GameObject health;
     public GameObject floatPoint;
-
-
+    public GameObject coin;//掉落物品
 
     private Vector2 direction;
     private bool isHit;
@@ -63,6 +62,7 @@ public class Enemy : MonoBehaviour
 
     public void destory(){
         Destroy(health.transform.parent.gameObject);
+        getCoin();
         Destroy(gameObject);
     }
 
@@ -72,6 +72,10 @@ public class Enemy : MonoBehaviour
 
     public void callCloseDefenseTime(){
         GameObject.Find("Player").GetComponent<PlayerController>().closeDefenseTime();
+    }
+
+    void getCoin(){
+        Instantiate(coin,transform.position,Quaternion.identity);
     }
     
 }

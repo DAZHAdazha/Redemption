@@ -10,17 +10,15 @@ public class MovingPlatform : MonoBehaviour
 
 
     private float waitTimeCurrent;
-    private Transform playerDefTransform;
+    private Transform currentDefTransform;
     private int posIndex;
 
-    // Start is called before the first frame update
     void Start()
     {
         posIndex = 1;
         //将左右两个点的子类分离
         transform.DetachChildren();
         waitTimeCurrent = waitTime;
-        playerDefTransform = GameObject.Find("Player").transform.parent;
     }
 
     // Update is called once per frame
@@ -44,14 +42,15 @@ public class MovingPlatform : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other) {
-        if(other.transform.tag=="Player"){
+        currentDefTransform = other.transform.parent;
+        if(other.transform.tag =="Player" || other.transform.tag == "Item"){
             other.gameObject.transform.parent = gameObject.transform;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other) {
-        if(other.transform.tag=="Player"){
-            other.gameObject.transform.parent = playerDefTransform;
+        if(other.transform.tag=="Player" || other.transform.tag == "Item"){
+            other.gameObject.transform.parent = currentDefTransform;
         }
     }
 }

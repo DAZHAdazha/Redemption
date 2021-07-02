@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     public float blinkTime = 0.1f;
     public bool isDefense = false;
     public Vector3 check;
+    public float critical;
 
 
     private float timer;
@@ -249,13 +250,20 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        int damage = 0;
-        bool isCritical = false;
-        if(attackReinfore>1){
-            isCritical = true;
-        }
         if (other.CompareTag("Enemy"))
         {
+            int damage = 0;
+            bool isCritical = false;
+            if(attackReinfore>1){
+            isCritical = true;
+        } else{
+            //判断暴击率
+                float r =Random.Range(0f,1f);
+                if(r<=critical){
+                    attackReinfore = 2;
+                    isCritical = true;
+                }
+        }
             if (attackType == "Light")
             {
                 AttackSense.Instance.HitPause(lightPause);
@@ -268,6 +276,8 @@ public class PlayerController : MonoBehaviour
                 AttackSense.Instance.CameraShake(shakeTime, heavyStrength);
                 damage = heavyDamage * attackReinfore;
             }
+            
+            attackReinfore = 1;
 
             if (transform.localScale.x > 0)
                 other.GetComponent<Enemy>().GetHit(Vector2.right,damage,isCritical);
