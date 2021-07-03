@@ -527,6 +527,28 @@
                     "action": "EnterDoor",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "be4748f7-b484-4f9c-b434-97460b4d9b5a",
+                    "path": "<DualShockGamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PS4",
+                    "action": "EnterDoor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3fb8209e-e7c8-40c3-b776-8cf5d0bd6618",
+                    "path": "<HID::HJC Game BETOP BFM GAMEPAD>/button9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XBOX",
+                    "action": "EnterDoor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

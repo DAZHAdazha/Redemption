@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
     public Vector3 check;
     public float critical;
 
-
     private float timer;
     private bool isAttack;
     private string attackType;
