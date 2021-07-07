@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public float speed;
+    public float hitSpeed;
     public GameObject health;
     public GameObject floatPoint;
     public GameObject coin;//掉落物品
@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
         info = animator.GetCurrentAnimatorStateInfo(0);
         if (isHit)
         {
-            rigidbody.velocity = direction * speed;
+            rigidbody.velocity = direction * hitSpeed;
             if (info.normalizedTime >= .6f)
                 isHit = false;
         }
@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour
     }
 
     void getCoin(){
-        Instantiate(coin,transform.position,Quaternion.identity);
+        Instantiate(coin,new Vector2(transform.position.x,transform.position.y + 1f) ,Quaternion.identity);
     }
     
 }
