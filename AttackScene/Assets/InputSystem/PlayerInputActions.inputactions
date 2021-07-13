@@ -52,6 +52,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Shadow",
+                    "type": "Button",
+                    "id": "586c4622-ed4d-4689-9f09-8d98e5b21afb",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -547,6 +555,17 @@
                     "processors": "",
                     "groups": "XBOX",
                     "action": "EnterDoor",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80c78ab2-b2a7-4537-9e0b-3dd156c80efa",
+                    "path": "<Keyboard>/u",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Shadow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

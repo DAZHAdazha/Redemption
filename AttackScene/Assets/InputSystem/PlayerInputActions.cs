@@ -65,6 +65,14 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Shadow"",
+                    ""type"": ""Button"",
+                    ""id"": ""586c4622-ed4d-4689-9f09-8d98e5b21afb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -562,6 +570,17 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""action"": ""EnterDoor"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80c78ab2-b2a7-4537-9e0b-3dd156c80efa"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Shadow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -592,6 +611,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         m_GamePlay_HeavyAttack = m_GamePlay.FindAction("Heavy Attack", throwIfNotFound: true);
         m_GamePlay_Duck = m_GamePlay.FindAction("Duck", throwIfNotFound: true);
         m_GamePlay_EnterDoor = m_GamePlay.FindAction("EnterDoor", throwIfNotFound: true);
+        m_GamePlay_Shadow = m_GamePlay.FindAction("Shadow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -647,6 +667,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePlay_HeavyAttack;
     private readonly InputAction m_GamePlay_Duck;
     private readonly InputAction m_GamePlay_EnterDoor;
+    private readonly InputAction m_GamePlay_Shadow;
     public struct GamePlayActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -657,6 +678,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         public InputAction @HeavyAttack => m_Wrapper.m_GamePlay_HeavyAttack;
         public InputAction @Duck => m_Wrapper.m_GamePlay_Duck;
         public InputAction @EnterDoor => m_Wrapper.m_GamePlay_EnterDoor;
+        public InputAction @Shadow => m_Wrapper.m_GamePlay_Shadow;
         public InputActionMap Get() { return m_Wrapper.m_GamePlay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -684,6 +706,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @EnterDoor.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnEnterDoor;
                 @EnterDoor.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnEnterDoor;
                 @EnterDoor.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnEnterDoor;
+                @Shadow.started -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShadow;
+                @Shadow.performed -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShadow;
+                @Shadow.canceled -= m_Wrapper.m_GamePlayActionsCallbackInterface.OnShadow;
             }
             m_Wrapper.m_GamePlayActionsCallbackInterface = instance;
             if (instance != null)
@@ -706,6 +731,9 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 @EnterDoor.started += instance.OnEnterDoor;
                 @EnterDoor.performed += instance.OnEnterDoor;
                 @EnterDoor.canceled += instance.OnEnterDoor;
+                @Shadow.started += instance.OnShadow;
+                @Shadow.performed += instance.OnShadow;
+                @Shadow.canceled += instance.OnShadow;
             }
         }
     }
@@ -745,5 +773,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
         void OnHeavyAttack(InputAction.CallbackContext context);
         void OnDuck(InputAction.CallbackContext context);
         void OnEnterDoor(InputAction.CallbackContext context);
+        void OnShadow(InputAction.CallbackContext context);
     }
 }

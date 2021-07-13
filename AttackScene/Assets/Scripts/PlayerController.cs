@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     public bool isDefense = false;
     public Vector3 check;
     public float critical;
+    public GameObject shadow;
 
     private float timer;
     private bool isAttack;
@@ -58,6 +59,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 move;
     private PolygonCollider2D polygonCollider2D;
     private Renderer myRender;
+    private Shadow myShadow;
 
     private void Awake() {
 
@@ -86,6 +88,7 @@ public class PlayerController : MonoBehaviour
         screenFlash = GetComponent<ScreenFlash>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         myRender = GetComponent<Renderer>();
+        myShadow = shadow.GetComponent<Shadow>();
     }
 
     void Update()
@@ -117,6 +120,11 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if(controls.GamePlay.Shadow.triggered && !myShadow.getExit()){
+            GameObject thisShadow = Instantiate(shadow,new Vector2(transform.position.x,transform.position.y-0.4f) ,Quaternion.identity);
+            thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
+        }
+
         if(controls.GamePlay.Duck.triggered){
             if (!isDuck && isGround && ableToDuck)
             {
@@ -401,6 +409,10 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(seconds);
         }
         myRender.enabled = true;
+    }
+
+    public void playerShowUp(Vector3 target){
+        transform.position = target;
     }
 
 }
