@@ -106,7 +106,6 @@ public class Shadow : MonoBehaviour
                 return;
             }
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));
-        
         }
     }
 
