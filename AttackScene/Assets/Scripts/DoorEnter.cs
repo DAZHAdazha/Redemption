@@ -32,7 +32,6 @@ public class DoorEnter : MonoBehaviour
     }
 
     private void Awake() {
-
         //支持手柄
         controls = new PlayerInputActions();
 

@@ -13,6 +13,5 @@ public class FloatPointBase : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
     }
 }
