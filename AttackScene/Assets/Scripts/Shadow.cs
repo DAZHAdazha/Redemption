@@ -10,7 +10,7 @@ public class Shadow : MonoBehaviour
     private Vector3 target;
     private Vector2 move;
     private float face;
-    private float lowY;
+    // private float lowY;
     // Start is called before the first frame update
     
     private void setTarget(Vector2 direction){
@@ -71,7 +71,7 @@ public class Shadow : MonoBehaviour
         playerTransform = GameObject.Find("Player").transform;
         isExit = true;
         setTarget(move);
-        lowY = GameObject.Find("LowestPoint").transform.position.y;
+        // lowY = GameObject.Find("LowestPoint").transform.position.y;
     }
 
     // Update is called once per frame
@@ -81,11 +81,11 @@ public class Shadow : MonoBehaviour
         if(Vector3.Distance(transform.position,target)<0.1f){
             Destroy(gameObject);
             isExit = false;
-            if(transform.position.y + 0.4<lowY){
-                //lowestPoint应当放到player头顶贴图位置（或者按W看位置）
-                playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, lowY));
-                return;
-            }
+            // if(transform.position.y + 0.4<lowY){
+            //     //lowestPoint应当放到player头顶贴图位置（或者按W看位置）
+            //     playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, lowY));
+            //     return;
+            // }
             //此处0.4f耦合
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));
         }
@@ -97,14 +97,15 @@ public class Shadow : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.layer==LayerMask.NameToLayer("Ground") || other.gameObject.layer==LayerMask.NameToLayer("OneWayPlatform")){
+        if(other.gameObject.layer==LayerMask.NameToLayer("Ground") || other.gameObject.layer==LayerMask.NameToLayer("OneWayPlatform")
+        || other.gameObject.layer==LayerMask.NameToLayer("WorldBoundary")){
             Destroy(gameObject);
             isExit = false;
-            //此处0.4f耦合
-            if(transform.position.y + 0.4<lowY){
-                playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, lowY));
-                return;
-            }
+            // 此处0.4f耦合
+            // if(transform.position.y + 0.4<lowY){
+            //     playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, lowY));
+            //     return;
+            // }
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));
         }
     }
