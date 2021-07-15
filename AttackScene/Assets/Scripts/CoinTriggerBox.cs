@@ -4,10 +4,15 @@ using UnityEngine;
 
 public class CoinTriggerBox : MonoBehaviour
 {
-    
+    private bool isUsed;
+
+    private void Start()
+    {
+        isUsed = false;
+    }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")){
+        if(other.gameObject.CompareTag("Player") && !isUsed){
             
             
             
@@ -17,6 +22,7 @@ public class CoinTriggerBox : MonoBehaviour
             //调用音效
             SoundManager.soundManagerInstance.pickCoinAudio();
             transform.parent.GetComponent<CoinUI>().setCoinNumText();
+            isUsed = true;
         }
     }
 }
