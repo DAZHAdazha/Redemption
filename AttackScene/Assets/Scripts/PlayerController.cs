@@ -5,6 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("解锁能力")]
+    public bool attackLock = false;
+    public bool duckLock = false;
+    public bool shadowLock = false;
+    public bool defenseLock = false;
+    public bool bonusLock = false;
     [Header("补偿速度")]
     public float lightSpeed;
     public float heavySpeed;
@@ -120,15 +126,15 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if(controls.GamePlay.Shadow.triggered && !myShadow.getExit()){
+        if(shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExit()){
             GameObject thisShadow = Instantiate(shadow,new Vector2(transform.position.x,transform.position.y-0.4f) ,Quaternion.identity);
             thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
         }
 
-        if(controls.GamePlay.Duck.triggered){
+        if(duckLock && controls.GamePlay.Duck.triggered ){
             if (!isDuck && isGround && ableToDuck)
             {
-                if(isHurt && defenseTime){
+                if(defenseLock && isHurt && defenseTime){
                     isDefense = true;
                     defenseTime = false;
                     transform.Find("defense").gameObject.SetActive(true);
@@ -137,7 +143,7 @@ public class PlayerController : MonoBehaviour
                     animator.SetBool("Hurt",false);
                     rigidbody.constraints = RigidbodyConstraints2D.None;
                 }
-                if(bonusActive && bonusTime && !isBonus){
+                if(bonusLock && bonusActive && bonusTime && !isBonus){
                     isBonus = true;
                     transform.GetComponent<SpriteRenderer>().color = new Color32(255,81,81,255);
                     transform.Find("Bonus").gameObject.SetActive(false);
@@ -197,7 +203,7 @@ public class PlayerController : MonoBehaviour
 
     void Attack()
     {
-        if (controls.GamePlay.LightAttack.triggered && !isAttack && !isDuck)
+        if (attackLock && controls.GamePlay.LightAttack.triggered && !isAttack && !isDuck)
         {
             bonusActive = true;
             if(isBonus){
@@ -217,7 +223,7 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("LightAttack");
             animator.SetInteger("ComboStep", comboStep);
         }
-        if (controls.GamePlay.HeavyAttack.triggered && !isAttack && !isDuck)
+        if (attackLock && controls.GamePlay.HeavyAttack.triggered && !isAttack && !isDuck)
         {
             bonusActive = true;
             if(isBonus){
