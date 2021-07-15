@@ -11,6 +11,7 @@ public class GameSaveManager : MonoBehaviour
     private int coinNum;
     private Dictionary<string, string> data = new Dictionary<string, string>();
     private HealthSystem myHealthSystem;
+    private CoinUI myCoinUI;
 
 
     private void Start()
@@ -19,6 +20,7 @@ public class GameSaveManager : MonoBehaviour
         myHealthSystem = GameObject.Find("TinyHealthSystem").GetComponent<HealthSystem>();
         data.Add("health", "");
         data.Add("coinNum", "");
+        myCoinUI = GameObject.Find("CoinUI").GetComponent<CoinUI>();
 
     }
 
@@ -44,15 +46,15 @@ public class GameSaveManager : MonoBehaviour
         StreamWriter sw = new StreamWriter(file);
         //开始写入
 
-           sw.Write("health" + "," + data["health"]); 
-           sw.Write("\n"); 
-           sw.Write("coinNum" + "," + data["coinNum"]); 
-            //清空缓冲区
-            sw.Flush();
-            //关闭流
-            sw.Close();
+         sw.Write("health" + "," + data["health"]); 
+         sw.Write("\n"); 
+         sw.Write("coinNum" + "," + data["coinNum"]); 
+          //清空缓冲区
+          sw.Flush();
+          //关闭流
+          sw.Close();
 
-            file.Close();
+          file.Close();
     }
 
     public void loadGame(){
@@ -73,6 +75,12 @@ public class GameSaveManager : MonoBehaviour
 
             Debug.Log(dic["health"]);
             Debug.Log(dic["coinNum"]);
+
+            myHealthSystem.hitPoint = float.Parse(dic["health"]);
+            myHealthSystem.UpdateGraphics();
+            CoinUI.coinNum = int.Parse(dic["coinNum"]);
+            myCoinUI.setCoinNumText();
+
 
             file.Close();
         }
