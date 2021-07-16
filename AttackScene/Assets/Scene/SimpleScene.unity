@@ -2775,7 +2775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &664537783
 GameObject:
@@ -3309,7 +3309,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &849457486
 GameObject:
@@ -3603,7 +3603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1026267333
 GameObject:
@@ -5651,7 +5651,7 @@ Transform:
   - {fileID: 433716071}
   - {fileID: 1520480514}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!68 &1585354755
 EdgeCollider2D:
@@ -5673,7 +5673,7 @@ EdgeCollider2D:
   - {x: -35.01193, y: 6.33053}
   - {x: -35.018936, y: -2.9556396}
   - {x: 12.185982, y: -3.0068321}
-  - {x: 12.109606, y: 6.31202}
+  - {x: 12.15401, y: 6.93367}
   m_AdjacentStartPoint: {x: 0, y: 0}
   m_AdjacentEndPoint: {x: 0, y: 0}
   m_UseAdjacentStartPoint: 0
@@ -6034,6 +6034,24 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+  - m_RefCount: 0
+    m_Data:
+      e00: 1.084227e-19
+      e01: -3.6343417e-32
+      e02: -3.634083e-32
+      e03: -3.634083e-32
+      e10: 6.92e-43
+      e11: 2.91e-43
+      e12: 2.91e-43
+      e13: 2.91e-43
+      e20: -0.0007203007
+      e21: 2.126915
+      e22: -9.686043
+      e23: 2.126915
+      e30: 4.5904e-41
+      e31: 6.94e-43
+      e32: 6.91e-43
+      e33: 6.94e-43
   m_TileColorArray:
   - m_RefCount: 14
     m_Data: {r: 1, g: 1, b: 1, a: 1}
@@ -6184,7 +6202,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1689879182
 GameObject:
@@ -6220,7 +6238,7 @@ RectTransform:
   - {fileID: 524618759}
   - {fileID: 867342462}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -8172,14 +8190,14 @@ CompositeCollider2D:
         Y: -39838708
       - X: 130161288
         Y: -39838708
-    - - X: -410161280
-        Y: -50161292
-      - X: 130161288
-        Y: -50161292
-      - X: 130161288
+    - - X: 130161288
         Y: -40322580
       - X: -410161280
         Y: -40322580
+      - X: -410161280
+        Y: -50161292
+      - X: 130161288
+        Y: -50161292
   m_CompositePaths:
     m_Paths:
     - - {x: 13.016099, y: -4.083871}
@@ -9438,8 +9456,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -41, y: -5, z: 0}
-  m_Size: {x: 54, y: 7, z: 1}
+  m_Origin: {x: -54, y: -8, z: 0}
+  m_Size: {x: 67, y: 10, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -9812,7 +9830,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2291992258678720469, guid: a005d248b33af654094ff6f47b126b3a, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2291992258678720469, guid: a005d248b33af654094ff6f47b126b3a, type: 3}
       propertyPath: m_LocalPosition.x

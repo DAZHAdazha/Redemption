@@ -384,10 +384,11 @@ public class PlayerController : MonoBehaviour
         healthSystem.GetComponent<HealthSystem>().TakeDamage(damage);
         polygonCollider2D.enabled = false;
         StartCoroutine("showPlayerHitbox");
+        
     }
 
     IEnumerator showPlayerHitbox(){
-        yield return new WaitForSeconds(hitboxTime);
+       yield return new WaitForSeconds(hitboxTime);
         polygonCollider2D.enabled = true;
     }
 
