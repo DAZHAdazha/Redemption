@@ -24,7 +24,7 @@ public class TrapPlatform : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
 
 
-        if(other.gameObject.CompareTag("Player") && other.transform.GetComponent<PlayerController>().check.y + other.transform.localPosition.y >= transform.position.y){
+        if(other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D" &&  other.transform.GetComponent<PlayerController>().check.y + other.transform.localPosition.y >= transform.position.y){
             anim.SetTrigger("Collapse");
         }
     }

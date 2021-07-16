@@ -34,13 +34,15 @@ public class TreasureBox : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")){
+        if(other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D")
+        {
             ableToOpen = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
-        if(other.gameObject.CompareTag("Player")){
+        if(other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D")
+        {
             ableToOpen = false;
         }
     }

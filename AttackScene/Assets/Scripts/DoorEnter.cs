@@ -11,10 +11,11 @@ public class DoorEnter : MonoBehaviour
     private PlayerInputActions controls;
     private Animator anim;
     private Animator otherAnim;
-    // Start is called before the first frame update
+    private PlayerController playerController;
     void Start()
     {
         playerTransform = GameObject.Find("Player").GetComponent<Transform>();
+        playerController = playerTransform.GetComponent<PlayerController>();
         anim = gameObject.GetComponent<Animator>();
         otherAnim = backDoor.GetComponent<Animator>();
     }
@@ -47,7 +48,8 @@ public class DoorEnter : MonoBehaviour
     }
 
     void enterDoor(){
-        if(isDoor){
+        if(isDoor && !playerController.myShadow.getExist())
+        {
             anim.SetTrigger("Suck");
             playerTransform.gameObject.SetActive(false);
         }

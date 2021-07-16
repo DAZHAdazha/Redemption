@@ -42,6 +42,9 @@ public class PlayerController : MonoBehaviour
     public Vector3 check;
     public float critical;
     public GameObject shadow;
+    public bool isPuzzled;
+    public Shadow myShadow;
+    public GameObject status;
 
     private float timer;
     private bool isAttack;
@@ -65,7 +68,9 @@ public class PlayerController : MonoBehaviour
     private Vector2 move;
     private PolygonCollider2D polygonCollider2D;
     private Renderer myRender;
-    private Shadow myShadow;
+
+    
+
 
     private void Awake() {
 
@@ -103,6 +108,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private void updateFunction(){
+
         //layer中oneWayPlatform的index为1
         isOneWayPlatform = Physics2D.OverlapCircle(transform.position + new Vector3(check.x, check.y, 0), check.z, layers[1]);
         if(isOneWayPlatform){
@@ -126,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if(shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExit()){
+        if(shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist()){
             GameObject thisShadow = Instantiate(shadow,new Vector2(transform.position.x,transform.position.y-0.4f) ,Quaternion.identity);
             thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
         }
@@ -164,7 +170,14 @@ public class PlayerController : MonoBehaviour
 
         if (!isAttack){
             if(!isDuck && !isHurt){
-                rigidbody.velocity = new Vector2(move.x * moveSpeed,  rigidbody.velocity.y);
+                if (isPuzzled){
+                    rigidbody.velocity = new Vector2(-move.x * moveSpeed, rigidbody.velocity.y);
+                }
+                else
+                {
+                    rigidbody.velocity = new Vector2(move.x * moveSpeed, rigidbody.velocity.y);
+                }
+                
             }
         }
         else
@@ -381,14 +394,16 @@ public class PlayerController : MonoBehaviour
     public void getDamage(float damage = 1f){
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
         screenFlash.FlashScreen();
+        StartCoroutine("showPlayerHitbox");
         healthSystem.GetComponent<HealthSystem>().TakeDamage(damage);
         polygonCollider2D.enabled = false;
-        StartCoroutine("showPlayerHitbox");
+        
+
         
     }
 
     IEnumerator showPlayerHitbox(){
-       yield return new WaitForSeconds(hitboxTime);
+        yield return new WaitForSeconds(hitboxTime);
         polygonCollider2D.enabled = true;
     }
 

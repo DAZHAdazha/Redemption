@@ -5,13 +5,12 @@ using UnityEngine;
 public class Shadow : MonoBehaviour
 {
     private Transform playerTransform;
-    public static bool isExit = false;
+    public static bool isExist = false;
     public float speed;
     private Vector3 target;
     private Vector2 move;
     private float face;
-    // private float lowY;
-    // Start is called before the first frame update
+    public GameObject effect;
     
     private void setTarget(Vector2 direction){
         transform.localScale = new Vector3(face,transform.localScale.y,transform.localScale.z);
@@ -61,17 +60,16 @@ public class Shadow : MonoBehaviour
         }
     }
 
-    public bool getExit(){
-        return isExit;
+    public bool getExist(){
+        return isExist;
     }
 
 
     void Start()
     {
         playerTransform = GameObject.Find("Player").transform;
-        isExit = true;
+        isExist = true;
         setTarget(move);
-        // lowY = GameObject.Find("LowestPoint").transform.position.y;
     }
 
     // Update is called once per frame
@@ -80,14 +78,10 @@ public class Shadow : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target,speed*Time.deltaTime);
         if(Vector3.Distance(transform.position,target)<0.1f){
             Destroy(gameObject);
-            isExit = false;
-            // if(transform.position.y + 0.4<lowY){
-            //     //lowestPoint应当放到player头顶贴图位置（或者按W看位置）
-            //     playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, lowY));
-            //     return;
-            // }
-            //此处0.4f耦合
+            isExist = false;
+            Instantiate(effect, transform.position, Quaternion.identity);
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));
+
         }
     }
 
@@ -100,14 +94,12 @@ public class Shadow : MonoBehaviour
         if(other.gameObject.layer==LayerMask.NameToLayer("Ground") || other.gameObject.layer==LayerMask.NameToLayer("OneWayPlatform")
         || other.gameObject.layer==LayerMask.NameToLayer("WorldBoundary")){
             Destroy(gameObject);
-            isExit = false;
-            // 此处0.4f耦合
-            // if(transform.position.y + 0.4<lowY){
-            //     playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, lowY));
-            //     return;
-            // }
+            isExist = false;
+
+            Instantiate(effect, transform.position, Quaternion.identity);
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));
         }
     }
+
 
 }
