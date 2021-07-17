@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource audioSource;
     
     [SerializeField]
-    private AudioClip pickCoin;
+    private AudioClip pickCoin, openBox, hidenSpike;
 
     private void Awake() {
         soundManagerInstance = this;
@@ -18,6 +18,18 @@ public class SoundManager : MonoBehaviour
 
     public void pickCoinAudio(){
         audioSource.clip = pickCoin;
+        audioSource.Play();
+    }
+
+    public void openBoxAudio()
+    {
+        audioSource.clip = openBox;
+        audioSource.Play();
+    }
+
+    public void hidenSpikeAudio()
+    {
+        audioSource.clip = hidenSpike;
         audioSource.Play();
     }
 }

@@ -14,8 +14,6 @@ public class CoinTriggerBox : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.gameObject.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D" && !isUsed){
             
-            
-            
             Destroy(gameObject.transform.parent.gameObject);
             //静态成员可以直接调用
             CoinUI.coinNum += 1;

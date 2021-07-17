@@ -25,6 +25,7 @@ public class HideSpike : MonoBehaviour
 
     IEnumerator spikeAttack(){
         yield return new WaitForSeconds(attackTime);
+        SoundManager.soundManagerInstance.hidenSpikeAudio();
         anim.SetTrigger("Attack");
         Instantiate(triggerBox,transform.position,Quaternion.identity);
     }

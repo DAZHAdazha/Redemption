@@ -276,20 +276,29 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot"))
         {
-            int damage = 0;
+            int type;
+            if (other.CompareTag("Skeleton"))
+            {
+                type = 0;
+            }
+            else
+            {
+                type = 1;
+            }
+             int damage = 0;
             bool isCritical = false;
             if(attackReinfore>1){
-            isCritical = true;
-        } else{
+                isCritical = true;
+            } else{
             //判断暴击率
                 float r =Random.Range(0f,1f);
                 if(r<=critical){
                     attackReinfore = 2;
                     isCritical = true;
                 }
-        }
+             }
             if (attackType == "Light")
             {
                 AttackSense.Instance.HitPause(lightPause);
@@ -305,15 +314,27 @@ public class PlayerController : MonoBehaviour
             
             attackReinfore = 1;
 
-            if (transform.localScale.x > 0)
-                other.GetComponent<Enemy>().GetHit(Vector2.right,damage,isCritical);
-            else if (transform.localScale.x < 0)
-                other.GetComponent<Enemy>().GetHit(Vector2.left,damage,isCritical);
+            if (type == 0)//骷髅怪
+            {
+                if (transform.localScale.x > 0)
+                    other.GetComponent<Enemy>().GetHit(Vector2.right, damage, isCritical);
+                else if (transform.localScale.x < 0)
+                    other.GetComponent<Enemy>().GetHit(Vector2.left, damage, isCritical);
+            }
+            else//puzzle robot
+            {
+                 other.GetComponent<PuzzleRobot>().GetHit(damage, isCritical);
+            }
+            
         }
-        if(other.CompareTag("EnemyAttack")){
+        if(other.CompareTag("SkeletonAttack")){
             if(!isDefense){
                 getHit();
             }
+        }
+        if (other.CompareTag("PuzzleRobot"))
+        {
+            
         }
     }
 

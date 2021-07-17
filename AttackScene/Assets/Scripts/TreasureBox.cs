@@ -49,6 +49,7 @@ public class TreasureBox : MonoBehaviour
 
     void openBox(){
         if(ableToOpen && !isOpen){
+            SoundManager.soundManagerInstance.openBoxAudio();
             anim.SetTrigger("Opening");
             isOpen = true;
             Invoke("getCoin",delayTime);

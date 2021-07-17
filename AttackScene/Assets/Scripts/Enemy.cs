@@ -20,6 +20,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         animator = transform.GetComponent<Animator>();
+        //注意！第一个子物体为hitAnimation
         hitAnimator = transform.GetChild(0).GetComponent<Animator>();
         rigidbody = transform.GetComponent<Rigidbody2D>();
     }
