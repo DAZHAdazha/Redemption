@@ -132,7 +132,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if(shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist()){
+        if( shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist()){
             GameObject thisShadow = Instantiate(shadow,new Vector2(transform.position.x,transform.position.y-0.4f) ,Quaternion.identity);
             thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
         }
@@ -276,16 +276,19 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot"))
+        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot") || other.CompareTag("Bat"))
         {
-            int type;
+            int type = 0;
             if (other.CompareTag("Skeleton"))
             {
                 type = 0;
             }
-            else
+            else if (other.CompareTag("PuzzleRobot"))
             {
                 type = 1;
+            }else if(other.CompareTag("Bat"))
+            {
+                type = 2;
             }
              int damage = 0;
             bool isCritical = false;
@@ -321,20 +324,25 @@ public class PlayerController : MonoBehaviour
                 else if (transform.localScale.x < 0)
                     other.GetComponent<Enemy>().GetHit(Vector2.left, damage, isCritical);
             }
-            else//puzzle robot
+            else if(type == 1)//puzzle robot
             {
                  other.GetComponent<PuzzleRobot>().GetHit(damage, isCritical);
             }
-            
+            else if (type == 2)
+            {
+                other.GetComponent<Bat>().GetHit(damage, isCritical);
+            }
+
         }
         if(other.CompareTag("SkeletonAttack")){
             if(!isDefense){
                 getHit();
             }
         }
-        if (other.CompareTag("PuzzleRobot"))
+        if (other.CompareTag("PuzzleRobotAttack"))
         {
-            
+            getHit();
+            other.GetComponent<PuzzleAttack>().anim.Play("Hit");
         }
     }
 
@@ -414,7 +422,12 @@ public class PlayerController : MonoBehaviour
 
     public void getDamage(float damage = 1f){
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
-        screenFlash.FlashScreen();
+        if (!myShadow.getExist())
+        {
+            screenFlash.FlashScreen();
+        }
+        
+
         StartCoroutine("showPlayerHitbox");
         healthSystem.GetComponent<HealthSystem>().TakeDamage(damage);
         polygonCollider2D.enabled = false;
@@ -443,7 +456,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public void blinkPlayer(){
-        StartCoroutine(blink(numBlinks,blinkTime));
+        if (!myShadow.getExist())
+        {
+            StartCoroutine(blink(numBlinks, blinkTime));
+        }
     }
 
     IEnumerator blink(int numBlinks, float seconds){
@@ -454,8 +470,10 @@ public class PlayerController : MonoBehaviour
         myRender.enabled = true;
     }
 
-    public void playerShowUp(Vector3 target){
+    public void playerShowUp(Vector3 target) {
         transform.position = target;
+        polygonCollider2D.enabled = true;
+        resolveHurt();
     }
 
 }

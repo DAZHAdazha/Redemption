@@ -13,14 +13,14 @@ public class myParameter
 {
     public int health;
     public float moveSpeed;
-    public float chaseSpeed;
+    //public float chaseSpeed;
     public float idleTime;
-    public Transform[] patrolPoints;
-    public Transform[] chasePoints;
+    //public Transform[] patrolPoints;
+    //public Transform[] chasePoints;
     public Transform target;
-    public LayerMask targetLayer;
-    public Transform attackPoint;
-    public float attackArea;
+    //public LayerMask targetLayer;
+    //public Transform attackPoint;
+    //public float attackArea;
     public Animator animator;
     public Collider2D collider;
     public Rigidbody2D rigidbody;
@@ -31,6 +31,9 @@ public class myParameter
     public float chaseArea;
     public float dashLength;
     public float dashCoolDown;
+    public GameObject puzzleAttack;
+    public Transform worldBoundaryLeft, worldBoundaryRight;
+    public GameObject healthSystem;
 }
 public class FSM_PuzzleRobot : MonoBehaviour
 {
@@ -45,6 +48,7 @@ public class FSM_PuzzleRobot : MonoBehaviour
         parameter.target = GameObject.Find("Player").transform;
         parameter.rigidbody = transform.GetComponent<Rigidbody2D>();
         parameter.collider = transform.GetComponent<Collider2D>();
+        parameter.healthSystem = transform.GetComponent<PuzzleRobot>().health;
         states.Add(myStateType.Idle, new myIdleState(this));
         states.Add(myStateType.Patrol, new myPatrolState(this));
         states.Add(myStateType.Dash, new myDashState(this));
@@ -101,6 +105,12 @@ public class FSM_PuzzleRobot : MonoBehaviour
                     
             }
         }
+    }
+
+    public void generatePuzzleAttack(float direction)
+    {
+        GameObject ob = Instantiate(parameter.puzzleAttack, new Vector2(transform.position.x, transform.position.y + 0.7f), Quaternion.identity);
+        ob.GetComponent<PuzzleAttack>().direction = direction;
     }
 
     //private void OnTriggerEnter2D(Collider2D other)

@@ -16,11 +16,22 @@ public class health : MonoBehaviour
 
     private Vector2 currentPosition;
     private Image healthBar;
+    private int type;
     
     void Start()
     {
         healthBar = GetComponent<Image>();
-        healthMax = enemy.GetComponent<FSM>().parameter.health;
+        if (enemy.GetComponent<FSM>())
+        {
+            healthMax = enemy.GetComponent<FSM>().parameter.health;
+            type = 0;
+        }
+        else if(enemy.GetComponent<FSM_PuzzleRobot>())
+        {
+            healthMax = enemy.GetComponent<FSM_PuzzleRobot>().parameter.health;
+            type = 1;
+        }
+        
         healthCurrent = healthMax;
         updateHealthBar();
     }
@@ -40,7 +51,14 @@ public class health : MonoBehaviour
     }
 
     public void callUpdateHealth(){
-        healthCurrent = enemy.GetComponent<FSM>().parameter.health;
+        if (type == 0)
+        {
+            healthCurrent = enemy.GetComponent<FSM>().parameter.health;
+        }else if(type == 1)
+        {
+            healthCurrent = enemy.GetComponent<FSM_PuzzleRobot>().parameter.health;
+        }
+        
         updateHealthBar();
     }
 }

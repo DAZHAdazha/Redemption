@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour
         health.GetComponent<health>().callUpdateHealth();
 
         this.direction = direction;
-        animator.SetTrigger("Hit");
+        //animator.SetTrigger("Hit");
         hitAnimator.SetTrigger("Hit");
     }
 

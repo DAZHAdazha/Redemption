@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class myIdleState : IState
 {
     private FSM_PuzzleRobot manager;
     private myParameter parameter;
 
-    private float timer;
+    //private float timer;
     public myIdleState(FSM_PuzzleRobot manager)
     {
         this.manager = manager;
@@ -15,7 +16,7 @@ public class myIdleState : IState
     }
     public void OnEnter()
     {
-
+        parameter.healthSystem.SetActive(false);
         parameter.animator.Play("Idle");
     }
 
@@ -39,7 +40,8 @@ public class myIdleState : IState
         //}
         //if (timer >= parameter.idleTime)
         //{
-        //    manager.TransitionState(myStateType.Patrol);
+        //    manager.TransitionState(myStateType.
+        //    );
         //}
     }
 
@@ -54,7 +56,7 @@ public class myReactState : IState
     private FSM_PuzzleRobot manager;
     private myParameter parameter;
 
-    private AnimatorStateInfo info;
+    //private AnimatorStateInfo info;
     private float timer;
     public myReactState(FSM_PuzzleRobot manager)
     {
@@ -63,6 +65,7 @@ public class myReactState : IState
     }
     public void OnEnter()
     {
+        parameter.healthSystem.SetActive(true);
         parameter.animator.Play("Awake");
     }
 
@@ -99,7 +102,7 @@ public class myPatrolState : IState
 {
     private FSM_PuzzleRobot manager;
     private myParameter parameter;
-    private int patrolPosition;
+    //private int patrolPosition;
     private float distance;
     private float dashCoolDown;
     private float dashCoolDownTimer = 1000f;
@@ -117,6 +120,7 @@ public class myPatrolState : IState
 
     public void OnUpdate()
     {
+        manager.transform.position = new Vector2(Mathf.Clamp(manager.transform.position.x, parameter.worldBoundaryLeft.position.x, parameter.worldBoundaryRight.position.x), manager.transform.position.y);
         dashCoolDownTimer += Time.deltaTime;
         distance = Vector2.Distance( manager.transform.position, parameter.target.position);
         //Debug.Log(distance);
@@ -281,6 +285,7 @@ public class myAttackState : IState
     public void OnEnter()
     {
         parameter.animator.Play("Shoot");
+        manager.generatePuzzleAttack(-manager.transform.localScale.x);
     }
 
     public void OnUpdate()
@@ -345,12 +350,12 @@ public class myHitState : IState
 
 public class myDeathState : IState
 {
-    private FSM_PuzzleRobot manager;
+    //private FSM_PuzzleRobot manager;
     private myParameter parameter;
 
     public myDeathState(FSM_PuzzleRobot manager)
     {
-        this.manager = manager;
+        //this.manager = manager;
         this.parameter = manager.parameter;
     }
     public void OnEnter()
