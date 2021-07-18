@@ -83,7 +83,7 @@ public class Bat : MonoBehaviour
         bathealth -= damage;
         Flashcolor(flashtime);
         Instantiate(bloodEffect,transform.position,Quaternion.identity);
-        GameObject gb = Instantiate(floatPoint, new Vector2(transform.position.x - 0.5f, transform.position.y + 1f), Quaternion.identity);
+        GameObject gb = Instantiate(floatPoint, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
         gb.transform.GetChild(0).GetComponent<TextMesh>().text = damage.ToString();
         if (isCritical)
         {

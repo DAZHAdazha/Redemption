@@ -31,6 +31,11 @@ public class health : MonoBehaviour
             healthMax = enemy.GetComponent<FSM_PuzzleRobot>().parameter.health;
             type = 1;
         }
+        else if (enemy.GetComponent<fireWormAction>())
+        {
+            healthMax = enemy.GetComponent<fireWormAction>().maxHealth;
+            type = 2;
+        }
         
         healthCurrent = healthMax;
         updateHealthBar();
@@ -57,6 +62,9 @@ public class health : MonoBehaviour
         }else if(type == 1)
         {
             healthCurrent = enemy.GetComponent<FSM_PuzzleRobot>().parameter.health;
+        }else if(type == 2)
+        {
+            healthCurrent = (int)enemy.GetComponent<fireWormAction>().currentHealth;
         }
         
         updateHealthBar();

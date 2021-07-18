@@ -137,7 +137,7 @@ public class PlayerController : MonoBehaviour
             thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
         }
 
-        if(duckLock && controls.GamePlay.Duck.triggered ){
+        if(duckLock && !myShadow.getExist() && controls.GamePlay.Duck.triggered ){
             if (!isDuck && isGround && ableToDuck)
             {
                 if(defenseLock && isHurt && defenseTime){
@@ -276,7 +276,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot") || other.CompareTag("Bat"))
+        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot") || other.CompareTag("Bat") || other.CompareTag("firewarm"))
         {
             int type = 0;
             if (other.CompareTag("Skeleton"))
@@ -290,7 +290,11 @@ public class PlayerController : MonoBehaviour
             {
                 type = 2;
             }
-             int damage = 0;
+            else if (other.CompareTag("firewarm"))
+            {
+                type = 3;
+            }
+            int damage = 0;
             bool isCritical = false;
             if(attackReinfore>1){
                 isCritical = true;
@@ -332,17 +336,24 @@ public class PlayerController : MonoBehaviour
             {
                 other.GetComponent<Bat>().GetHit(damage, isCritical);
             }
+            else if (type == 3)
+            {
+                other.GetComponent<fireWormAction>().gotHit(damage, isCritical);
+            }
 
         }
-        if(other.CompareTag("SkeletonAttack")){
+        if(other.CompareTag("SkeletonAttack")){//fireball的flag也调成这个
             if(!isDefense){
                 getHit();
             }
         }
         if (other.CompareTag("PuzzleRobotAttack"))
         {
-            getHit();
-            other.GetComponent<PuzzleAttack>().anim.Play("Hit");
+            if (!isDefense)
+            {
+                getHit();
+                other.GetComponent<PuzzleAttack>().anim.Play("Hit");
+            }
         }
     }
 
