@@ -14,30 +14,35 @@ public class SceneSelect: MonoBehaviour
     5.tutorial
     6.theme  **/
     // SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-   public void patrol()
+   public void tutorial()
+   {
+       SceneManager.LoadScene(1);
+   }
+    public void fear()
    {
        SceneManager.LoadScene(2);
    }
-    public void dialog()
+   public void skeleton()
    {
        SceneManager.LoadScene(3);
    }
-   public void shadow()
+   public void bat()
    {
        SceneManager.LoadScene(4);
    }
-   public void tutorial()
+   public void firewarm()
    {
        SceneManager.LoadScene(5);
    }
-   public void theme()
-   {
-       SceneManager.LoadScene(6);
-   }
 
-   public void levelselect()
+    public void puzzlebot()
+    {
+        SceneManager.LoadScene(6);
+    }
+
+    public void levelselect()
    {
-       SceneManager.LoadScene(1);
+       SceneManager.LoadScene(0);
    }
      public void start()
    {

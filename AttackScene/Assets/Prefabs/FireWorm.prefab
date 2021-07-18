@@ -18,9 +18,9 @@ GameObject:
   - component: {fileID: 2074467962391003258}
   - component: {fileID: 2471449389212927498}
   - component: {fileID: 3996941065313232889}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FireWorm
-  m_TagString: enemy
+  m_TagString: firewarm
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -189,14 +189,18 @@ MonoBehaviour:
   observeRegion: {fileID: 718664593768460801}
   player:
     serializedVersion: 2
-    m_Bits: 256
-  maxHealth: 2
+    m_Bits: 264
+  maxHealth: 5
+  currentHealth: 0
   Attack: {fileID: 2074467962391003258}
   Alert: {fileID: 6874468480408605725}
   Move: {fileID: 3996941065313232889}
   hurt: {fileID: 2471449389212927498}
   fireball: {fileID: 3540442219648801017, guid: 19b0688a6b2b3d44b836cc1821cd63b0, type: 3}
   fireballAppearPosition: {fileID: 718664592640564799}
+  health: {fileID: 0}
+  floatPoint: {fileID: 0}
+  coin: {fileID: 0}
 --- !u!95 &718664592292858988
 Animator:
   serializedVersion: 3
