@@ -21,6 +21,11 @@ public class PlayerController : MonoBehaviour
     public int heavyPause;
     public float heavyStrength;
     [Space]
+
+    [Header("属性")]
+    public float health = 3;
+    public float mana = 3;
+
     public float interval = 2f;
     public float moveSpeed;
     public float duckSpeed;
@@ -29,8 +34,6 @@ public class PlayerController : MonoBehaviour
     public int lightDamage = 1;
     public int heavyDamage = 2;
     public Transform worldBoundaryLeft,worldBoundaryRight;
-    public float health = 3;
-    public float mana = 3;
     public GameObject healthSystem;
     public bool isStop = false;
     public float restoreTime;
@@ -68,6 +71,7 @@ public class PlayerController : MonoBehaviour
     private Vector2 move;
     private PolygonCollider2D polygonCollider2D;
     private Renderer myRender;
+    private HealthSystem myHealSystem;
 
     
 
@@ -93,9 +97,10 @@ public class PlayerController : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        healthSystem.GetComponent<HealthSystem>().setHealth(health);
-        healthSystem.GetComponent<HealthSystem>().setMana(mana);
-        healthSystem.GetComponent<HealthSystem>().UpdateGraphics();
+        myHealSystem = healthSystem.GetComponent<HealthSystem>();
+        myHealSystem.setHealth(health);
+        myHealSystem.setMana(mana);
+        myHealSystem.UpdateGraphics();
         screenFlash = GetComponent<ScreenFlash>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         myRender = GetComponent<Renderer>();
@@ -132,7 +137,8 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if( shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist()){
+        if( shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist() && myHealSystem.manaPoint>=1f){
+            myHealSystem.UseMana(1f);//每次消耗一点魔法值
             GameObject thisShadow = Instantiate(shadow,new Vector2(transform.position.x,transform.position.y-0.4f) ,Quaternion.identity);
             thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
         }
@@ -389,7 +395,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void getHit(){
+    public void getHit() {
         isHurt = true;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("Hurt",true);
@@ -437,13 +443,10 @@ public class PlayerController : MonoBehaviour
         {
             screenFlash.FlashScreen();
         }
-        
 
         StartCoroutine("showPlayerHitbox");
-        healthSystem.GetComponent<HealthSystem>().TakeDamage(damage);
+        myHealSystem.TakeDamage(damage);
         polygonCollider2D.enabled = false;
-        
-
         
     }
 
@@ -482,6 +485,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void playerShowUp(Vector3 target) {
+        AttackOver();
         transform.position = target;
         polygonCollider2D.enabled = true;
         resolveHurt();

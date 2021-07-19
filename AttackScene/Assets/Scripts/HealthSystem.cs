@@ -30,8 +30,8 @@ public class HealthSystem : MonoBehaviour
 	//==============================================================
 	// Regenerate Health & Mana
 	//==============================================================
-	public bool Regenerate = false;
-	public float regen = 0.1f;
+	public bool Regenerate = true;
+	public float regen = 1f;
 	private float timeleft = 0.0f;	// Left time for current interval
 	public float regenUpdateInterval = 1f;
 
@@ -80,7 +80,7 @@ public class HealthSystem : MonoBehaviour
 			}
 			else
 			{
-				HealDamage(regen);
+				//HealDamage(regen);
 				RestoreMana(regen);				
 			}
 

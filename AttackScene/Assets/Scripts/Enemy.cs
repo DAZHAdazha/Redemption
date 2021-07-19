@@ -15,10 +15,12 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private Animator hitAnimator;
     new private Rigidbody2D rigidbody;
-    
+    private PlayerController playerController;
+
 
     void Start()
     {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
         animator = transform.GetComponent<Animator>();
         //注意！第一个子物体为hitAnimation
         hitAnimator = transform.GetChild(0).GetComponent<Animator>();
@@ -68,11 +70,11 @@ public class Enemy : MonoBehaviour
     }
 
     public void callStartDefenseTime(){
-        GameObject.Find("Player").GetComponent<PlayerController>().startDefenseTime();
+        playerController.startDefenseTime();
     }
 
     public void callCloseDefenseTime(){
-        GameObject.Find("Player").GetComponent<PlayerController>().closeDefenseTime();
+        playerController.closeDefenseTime();
     }
 
     void getCoin(){

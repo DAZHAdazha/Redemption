@@ -315,10 +315,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackLock: 1
-  duckLock: 0
-  shadowLock: 0
-  defenseLock: 0
-  bonusLock: 0
+  duckLock: 1
+  shadowLock: 1
+  defenseLock: 1
+  bonusLock: 1
   lightSpeed: 1.3
   heavySpeed: 0.7
   shakeTime: 0.1
