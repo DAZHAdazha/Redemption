@@ -58,7 +58,7 @@ public class PatrolStateNightmare1 : IState
     public void OnUpdate()
     {
         //受伤
-        if (parameter.getHit)
+        if (parameter.getHit && !parameter.unattackable)
         {
             manager.TransitionState(nightmareStateType1.Hit);
         }
@@ -80,7 +80,7 @@ public class PatrolStateNightmare1 : IState
         }
 
 
-        if (timer > parameter.patrolTime)
+        if (timer > parameter.patrolTime && distance >= parameter.attackArea)
         {
             manager.TransitionState(nightmareStateType1.Vanish);
         }
@@ -116,6 +116,7 @@ public class VanishStateNightmare1 : IState
     {
         parameter.animator.Play("vanish");
         manager.gameObject.tag = "Untagged";
+        //parameter.unattackable = true;
         parameter.healthCanvas.SetActive(false);
         //无法收到伤害 改变layer
     }
@@ -170,6 +171,7 @@ public class AppearStateNightmare1 : IState
     {
         //无敌结束 将Layer改回来
         manager.gameObject.tag = "Nightmare1";
+        //parameter.unattackable = false;
         parameter.healthCanvas.SetActive(true);
     }
 
@@ -198,14 +200,15 @@ public class AttackStateNightmare1 : IState
         parameter.animator.Play("Attack");
         if (parameter.health <= parameter.dangerHealth)
         {
-            manager.gameObject.tag = "Untagged";
+            //manager.gameObject.tag = "Untagged";
+            parameter.unattackable = true;
         }
     }
 
     public void OnUpdate()
     {
         timer += Time.deltaTime;
-        if (parameter.getHit)
+        if (parameter.getHit && !parameter.unattackable)
         {
             manager.TransitionState(nightmareStateType1.Hit);
         }
@@ -215,7 +218,8 @@ public class AttackStateNightmare1 : IState
         {
             if (info.normalizedTime >= .95)
             {
-                manager.gameObject.tag = "Nightmare1";
+                //manager.gameObject.tag = "Nightmare1";
+                parameter.unattackable = false;
             }
             
         }

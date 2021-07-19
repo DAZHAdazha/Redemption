@@ -41,7 +41,12 @@ public class health : MonoBehaviour
             healthMax = enemy.GetComponent<FSM_Nightmare1>().parameter.health;
             type = 3;
         }
-        
+        else if (enemy.GetComponent<FSM_Nightmare2>())
+        {
+            healthMax = enemy.GetComponent<FSM_Nightmare2>().parameter.health;
+            type = 4;
+        }
+
         healthCurrent = healthMax;
         updateHealthBar();
     }
@@ -49,13 +54,17 @@ public class health : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (type != 3)
+        if (type == 3)
         {
-            currentPosition = new Vector2(enemy.transform.position.x + 0.2f,enemy.transform.position.y + 1.3f);
+            currentPosition = new Vector2(enemy.transform.position.x + 0.2f, enemy.transform.position.y + 2.3f);
+        }
+        else if (type == 4)
+        {
+            currentPosition = new Vector2(enemy.transform.position.x-0.2f, enemy.transform.position.y + 2f);
         }
         else
         {
-            currentPosition = new Vector2(enemy.transform.position.x + 0.2f, enemy.transform.position.y + 2.3f);
+            currentPosition = new Vector2(enemy.transform.position.x + 0.2f, enemy.transform.position.y + 1.3f);
         }
         
         transform.position = currentPosition;
@@ -82,6 +91,10 @@ public class health : MonoBehaviour
         else if (type == 3)
         {
             healthCurrent = enemy.GetComponent<FSM_Nightmare1>().parameter.health;
+        }
+        else if (type == 4)
+        {
+            healthCurrent = enemy.GetComponent<FSM_Nightmare2>().parameter.health;
         }
 
         updateHealthBar();
