@@ -282,7 +282,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot") || other.CompareTag("Bat") || other.CompareTag("firewarm"))
+        if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot") || other.CompareTag("Bat") || other.CompareTag("firewarm")
+            || other.CompareTag("Nightmare1"))
         {
             int type = 0;
             if (other.CompareTag("Skeleton"))
@@ -299,6 +300,10 @@ public class PlayerController : MonoBehaviour
             else if (other.CompareTag("firewarm"))
             {
                 type = 3;
+            }
+            else if (other.CompareTag("Nightmare1"))
+            {
+                type = 4;
             }
             int damage = 0;
             bool isCritical = false;
@@ -345,6 +350,10 @@ public class PlayerController : MonoBehaviour
             else if (type == 3)
             {
                 other.GetComponent<fireWormAction>().gotHit(damage, isCritical);
+            }
+            else if (type == 4)
+            {
+                other.GetComponent<NightMare1>().GetHit(damage, isCritical);
             }
 
         }

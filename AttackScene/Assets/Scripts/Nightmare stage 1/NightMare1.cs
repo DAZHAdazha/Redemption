@@ -2,25 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleRobot : MonoBehaviour
+public class NightMare1 : MonoBehaviour
 {
     public GameObject floatPoint;
-    public GameObject coin;
     public GameObject health;
-
-    private Animator animator;
-    //private bool isHit;
+    //private Animator animator;
     private Animator hitAnimator;
+    private FSM_Nightmare1 fsm;
+    private bool dangerMark = false;
     // Start is called before the first frame update
     void Start()
     {
-
-        animator = gameObject.GetComponent<Animator>();
+        //animator = gameObject.GetComponent<Animator>();
         //注意！第一个子物体为hitAnimation
         hitAnimator = transform.GetChild(0).GetComponent<Animator>();
+        fsm = gameObject.GetComponent<FSM_Nightmare1>();
     }
 
-
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
 
     public void GetHit(int damage, bool isCritical)
     {
@@ -34,12 +37,19 @@ public class PuzzleRobot : MonoBehaviour
         }
 
         //！！！可优化 把敌人的参数位置移动一下
-        gameObject.GetComponent<FSM_PuzzleRobot>().parameter.getHit = true;
-        gameObject.GetComponent<FSM_PuzzleRobot>().parameter.health -= damage;
-        if (gameObject.GetComponent<FSM_PuzzleRobot>().parameter.health < 0)
+        fsm.parameter.getHit = true;
+        fsm.parameter.health -= damage;
+        if (fsm.parameter.health < 0)
         {
-            gameObject.GetComponent<FSM_PuzzleRobot>().parameter.health = 0;
+            fsm.parameter.health = 0;
         }
+
+        if(!dangerMark && fsm.parameter.health <= fsm.parameter.dangerHealth)
+        {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color32(248, 105, 97, 255);
+            dangerMark = true;
+        }
+
 
         health.GetComponent<health>().callUpdateHealth();
 
@@ -48,21 +58,11 @@ public class PuzzleRobot : MonoBehaviour
     }
 
 
-    public void callAwakeAnim()
-    {
-        animator.Play("Awake");
-    }
-
-
     public void destory()
     {
         Destroy(health.transform.parent.gameObject);
-        getCoin();//一定要写成函数 否则父物体消失后 无法拾取金币
         Destroy(gameObject);
     }
 
-    void getCoin()
-    {
-        Instantiate(coin, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
-    }
+
 }
