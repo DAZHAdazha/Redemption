@@ -1,0 +1,6 @@
+A
+Be careful! 
+B
+There are hidden spikes.
+A
+You will get hurt!

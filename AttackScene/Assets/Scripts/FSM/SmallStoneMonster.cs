@@ -8,6 +8,9 @@ public class SmallStoneMonster : MonoBehaviour
     public GameObject health;
     public GameObject floatPoint;
 
+    public GameObject middleStone;
+    public GameObject middleStoneCanvas;
+
     private Vector2 direction;
     private bool isHit;
     private AnimatorStateInfo info;
@@ -65,8 +68,15 @@ public class SmallStoneMonster : MonoBehaviour
 
     public void destory()
     {
+        middleStone.SetActive(true);
+        middleStoneCanvas.SetActive(true);
+        middleStone.gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 5f); 
+
         Destroy(health.transform.parent.gameObject);
         Destroy(gameObject);
+
+        
+
     }
 
 }
