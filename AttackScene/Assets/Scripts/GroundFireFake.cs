@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GroundFire : MonoBehaviour
+public class GroundFireFake : MonoBehaviour
 {
     [Header("动画器")]
     public Animator ani;
 
     public int leftTime = 3;
 
-    public float damage = 1f;
+    //public float damage = 1f;
 
-    private bool isHurt=false;
-    private PlayerController playerController;
+    //private bool isHurt=false;
+    //private PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
         ani = GetComponent<Animator>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        //playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
 
@@ -46,14 +46,5 @@ public class GroundFire : MonoBehaviour
         //Debug.Log("destoried");
         Destroy(gameObject);
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        //注意这里Player物体只能有一个Player Tag （子物体不能使用Player tag） 否则伤害会触发多次
-        if (!isHurt && other.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D" && !playerController.isDefense)
-        {
-            isHurt = true;
-            playerController.getDamage(damage);
-            playerController.blinkPlayer();
-        }
-    }
+
 }

@@ -371,7 +371,10 @@ public class DefenseStateNightmare2 : IState
     {
         parameter.animator.Play("Defense");
         parameter.isDefense = true;
-        manager.gameObject.GetComponent<NightMare2>().GetHit(parameter.healPoint, false);
+        if (manager.transform.localScale.x > 0)
+            manager.gameObject.GetComponent<NightMare2>().GetHit(Vector2.right, parameter.healPoint, false);
+        else
+            manager.gameObject.GetComponent<NightMare2>().GetHit(Vector2.left, parameter.healPoint, false);
     }
 
     public void OnUpdate()

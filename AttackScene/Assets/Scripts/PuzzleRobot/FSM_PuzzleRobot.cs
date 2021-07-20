@@ -11,6 +11,7 @@ public enum myStateType
 [Serializable]
 public class myParameter
 {
+    //puzzleAttack的攻击去puzzleAttck脚本里面调整
     public int health;
     public float moveSpeed;
     //public float chaseSpeed;

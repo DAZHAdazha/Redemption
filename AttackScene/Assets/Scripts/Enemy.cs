@@ -29,9 +29,9 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        info = animator.GetCurrentAnimatorStateInfo(0);
         if (isHit)
         {
+            info = animator.GetCurrentAnimatorStateInfo(0);
             rigidbody.velocity = direction * hitSpeed;
             if (info.normalizedTime >= .6f)
                 isHit = false;
@@ -59,7 +59,6 @@ public class Enemy : MonoBehaviour
         health.GetComponent<health>().callUpdateHealth();
 
         this.direction = direction;
-        //animator.SetTrigger("Hit");
         hitAnimator.SetTrigger("Hit");
     }
 

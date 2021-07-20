@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class fireBall : MonoBehaviour
 {
+
+
+    public float attackPoint;
+
     private Rigidbody2D rb;
     
 

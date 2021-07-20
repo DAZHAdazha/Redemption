@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class fireWormAction : MonoBehaviour
 {
+    public float hitSpeed;
     private Rigidbody2D rb;
+    private Vector2 direction;
+    private bool isHit;
+    private AnimatorStateInfo info;
+    private Animator hitAnimator;
 
     [Header("左右巡逻点")]
     public Transform leftPoint;
@@ -59,11 +64,18 @@ public class fireWormAction : MonoBehaviour
         Destroy(rightPoint.gameObject);
         observe = observeRegion.GetComponent<Collider2D>();//获取检查区域
         currentHealth = maxHealth;
+        hitAnimator = transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Update()
     {
-
+        if (isHit)
+        {
+            info = ani.GetCurrentAnimatorStateInfo(0);
+            rb.velocity = direction * hitSpeed;
+            if (info.normalizedTime >= .6f)
+                isHit = false;
+        }
     }
 
     private void movement()
@@ -128,8 +140,10 @@ public class fireWormAction : MonoBehaviour
         
     }
 
-    public void gotHit(float damage, bool isCritical)
+    public void gotHit(Vector2 direction, float damage, bool isCritical)
     {
+        isHit = true;
+
         hurt.Play();
         ani.SetBool("Hited", true);
         currentHealth-= damage;
@@ -146,6 +160,10 @@ public class fireWormAction : MonoBehaviour
         {
             ani.SetTrigger("death");
         }
+
+        this.direction = direction;
+
+        hitAnimator.SetTrigger("Hit");
     }
 
     public void destoryEnemy()

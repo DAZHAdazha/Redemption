@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class PuzzleRobot : MonoBehaviour
 {
+    public float hitSpeed;
     public GameObject floatPoint;
     public GameObject coin;
     public GameObject health;
 
+    private Vector2 direction;
+    private bool isHit;
+    private AnimatorStateInfo info;
+    new private Rigidbody2D rigidbody;
     private Animator animator;
-    //private bool isHit;
     private Animator hitAnimator;
     // Start is called before the first frame update
     void Start()
@@ -18,13 +22,25 @@ public class PuzzleRobot : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         //注意！第一个子物体为hitAnimation
         hitAnimator = transform.GetChild(0).GetComponent<Animator>();
+        rigidbody = transform.GetComponent<Rigidbody2D>();
+    }
+
+    void Update()
+    {
+        if (isHit)
+        {
+            info = animator.GetCurrentAnimatorStateInfo(0);
+            rigidbody.velocity = direction * hitSpeed;
+            if (info.normalizedTime >= .6f)
+                isHit = false;
+        }
     }
 
 
 
-    public void GetHit(int damage, bool isCritical)
+    public void GetHit(Vector2 direction, int damage, bool isCritical)
     {
-        //isHit = true;
+        isHit = true;
 
         GameObject gb = Instantiate(floatPoint, new Vector2(transform.position.x - 0.5f, transform.position.y + 1f), Quaternion.identity);
         gb.transform.GetChild(0).GetComponent<TextMesh>().text = damage.ToString();
@@ -43,6 +59,7 @@ public class PuzzleRobot : MonoBehaviour
 
         health.GetComponent<health>().callUpdateHealth();
 
+        this.direction = direction;
 
         hitAnimator.SetTrigger("Hit");
     }

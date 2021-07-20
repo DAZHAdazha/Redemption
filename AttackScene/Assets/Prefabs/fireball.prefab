@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3450108230282574251}
   m_Layer: 0
   m_Name: fireball
-  m_TagString: SkeletonAttack
+  m_TagString: FireballAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1562760b4a152140a6cafd367002dde, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackPoint: 2
   player:
     serializedVersion: 2
     m_Bits: 8

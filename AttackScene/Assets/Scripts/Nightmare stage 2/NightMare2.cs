@@ -4,27 +4,44 @@ using UnityEngine;
 
 public class NightMare2 : MonoBehaviour
 {
+    
     public GameObject floatPoint;
     public GameObject health;
-    //private Animator animator;
+    public float hitSpeed;
+
+    private Vector2 direction;
+    new private Rigidbody2D rigidbody;
+    private bool isHit;
+    private AnimatorStateInfo info;
+    private Animator animator;
     private Animator hitAnimator;
     private FSM_Nightmare2 fsm;
     private bool dangerMark = false;
     // Start is called before the first frame update
     void Start()
     {
-        //animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
         //注意！第一个子物体为hitAnimation
         hitAnimator = transform.GetChild(0).GetComponent<Animator>();
         fsm = gameObject.GetComponent<FSM_Nightmare2>();
+        rigidbody = transform.GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-
-
-    public void GetHit(int damage, bool isCritical)
+    void Update()
     {
-        //isHit = true;
+        if (isHit)
+        {
+            info = animator.GetCurrentAnimatorStateInfo(0);
+            rigidbody.velocity = direction * hitSpeed;
+            if (info.normalizedTime >= .6f)
+                isHit = false;
+        }
+    }
+
+
+    public void GetHit(Vector2 direction, int damage, bool isCritical)
+    {
+        isHit = true;
         int r=255, g=255, b=255;
         if (fsm.parameter.isDefense)
         {
@@ -51,9 +68,6 @@ public class NightMare2 : MonoBehaviour
         gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(r,g, b, 255);
 
 
-
-
-
         //！！！可优化 把敌人的参数位置移动一下
         fsm.parameter.getHit = true;
         fsm.parameter.health -= damage;
@@ -71,6 +85,7 @@ public class NightMare2 : MonoBehaviour
 
         health.GetComponent<health>().callUpdateHealth();
 
+        this.direction = direction;
 
         hitAnimator.SetTrigger("Hit");
     }

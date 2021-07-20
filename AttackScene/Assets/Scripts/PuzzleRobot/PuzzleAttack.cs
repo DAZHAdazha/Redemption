@@ -7,6 +7,7 @@ public class PuzzleAttack : MonoBehaviour
     public float speed;
     public float direction;
     public Animator anim;
+    public float attackPoint;
 
     private Rigidbody2D rigidbody2d;
     

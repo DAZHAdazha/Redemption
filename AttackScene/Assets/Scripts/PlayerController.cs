@@ -65,7 +65,7 @@ public class PlayerController : MonoBehaviour
     private bool bonusActive = true;
     private bool isHurt = false;
     private bool defenseTime = false;
-    private ScreenFlash screenFlash;
+    //private ScreenFlash screenFlash;
     private bool isOneWayPlatform; 
     private PlayerInputActions controls;
     private Vector2 move;
@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         myHealSystem.setHealth(health);
         myHealSystem.setMana(mana);
         myHealSystem.UpdateGraphics();
-        screenFlash = GetComponent<ScreenFlash>();
+        //screenFlash = GetComponent<ScreenFlash>();
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         myRender = GetComponent<Renderer>();
         myShadow = shadow.GetComponent<Shadow>();
@@ -340,43 +340,95 @@ public class PlayerController : MonoBehaviour
             {
                 if (transform.localScale.x > 0)
                     other.GetComponent<Enemy>().GetHit(Vector2.right, damage, isCritical);
-                else if (transform.localScale.x < 0)
+                else 
                     other.GetComponent<Enemy>().GetHit(Vector2.left, damage, isCritical);
             }
             else if(type == 1)//puzzle robot
             {
-                 other.GetComponent<PuzzleRobot>().GetHit(damage, isCritical);
+                if (transform.localScale.x > 0)
+                    other.GetComponent<PuzzleRobot>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<PuzzleRobot>().GetHit(Vector2.left, damage, isCritical);
             }
             else if (type == 2)
             {
-                other.GetComponent<Bat>().GetHit(damage, isCritical);
+                 other.GetComponent<Bat>().GetHit(damage, isCritical);
             }
             else if (type == 3)
             {
-                other.GetComponent<fireWormAction>().gotHit(damage, isCritical);
+                if (transform.localScale.x > 0)
+                    other.GetComponent<fireWormAction>().gotHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<fireWormAction>().gotHit(Vector2.left, damage, isCritical);
             }
             else if (type == 4)
             {
-                other.GetComponent<NightMare1>().GetHit(damage, isCritical);
+                if (transform.localScale.x > 0)
+                    other.GetComponent<NightMare1>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<NightMare1>().GetHit(Vector2.left, damage, isCritical);
             }
             else if (type == 5)
             {
-                other.GetComponent<NightMare2>().GetHit(damage, isCritical);
+                if (transform.localScale.x > 0)
+                    other.GetComponent<NightMare2>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<NightMare2>().GetHit(Vector2.left, damage, isCritical);
             }
 
         }
+        //TODO
         if(other.CompareTag("SkeletonAttack")){//fireball的flag也调成这个
             if(!isDefense){
                 getHit();
             }
+            return;
+        }
+        if (other.CompareTag("Nightmare1Attack"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<FSM_Nightmare1>().parameter.attackPoint-1);
+            }
+            return;
+        }
+        if (other.CompareTag("FireballAttack"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<fireBall>().attackPoint - 1);
+            }
+            return;
+        }
+        if (other.CompareTag("Nightmare2Attack"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<FSM_Nightmare2>().parameter.attackPoint - 1);
+            }
+            return;
+        }
+        if (other.CompareTag("Nightmare2Sweep"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<FSM_Nightmare2>().parameter.sweepPoint - 1);
+            }
+            return;
         }
         if (other.CompareTag("PuzzleRobotAttack"))
         {
             if (!isDefense)
             {
                 getHit();
+                getDamage(other.gameObject.GetComponent<PuzzleAttack>().attackPoint - 1);
                 other.GetComponent<PuzzleAttack>().anim.Play("Hit");
             }
+            return;
         }
     }
 
@@ -458,14 +510,14 @@ public class PlayerController : MonoBehaviour
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
         if (!myShadow.getExist())
         {
-            screenFlash.FlashScreen();
+            //screenFlash.FlashScreen();
         }
 
         StartCoroutine("showPlayerHitbox");
         myHealSystem.TakeDamage(damage);
         polygonCollider2D.enabled = false;
-        
     }
+
 
     IEnumerator showPlayerHitbox(){
         yield return new WaitForSeconds(hitboxTime);

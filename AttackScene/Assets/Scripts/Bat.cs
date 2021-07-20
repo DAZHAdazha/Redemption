@@ -18,16 +18,17 @@ public class Bat : MonoBehaviour
     public Transform movePos;
     public Transform leftDownPos;
     public Transform rightupPos;
+    public float hitSpeed;
     //private Vector2 direction;
 
     public GameObject bloodEffect;
 
-    private PlayerController pc;
-
-
     public GameObject health;
     public GameObject floatPoint;
     public GameObject coin;//掉落物品
+
+    private PlayerController pc;
+
 
 
     // Start is called before the first frame update
@@ -39,12 +40,11 @@ public class Bat : MonoBehaviour
 
         waitTime=startWaitTime;
         movePos.position = GetRandomPos();
-        
     }
     // Update is called once per frame
     public void Update()
     {
-        if(bathealth <= 0)
+        if (bathealth <= 0)
             destory();
        Move();
     }
@@ -90,7 +90,7 @@ public class Bat : MonoBehaviour
             gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255, 0, 0, 255);
         }
         //health.GetComponent<health>().callUpdateHealth();
-        
+
     }
     Vector2 GetRandomPos()
     {
@@ -103,8 +103,9 @@ public class Bat : MonoBehaviour
     {
         if(other.gameObject.CompareTag("Player") && other.GetType().ToString() =="UnityEngine.PolygonCollider2D")
         {
-            pc.getDamage(batdamage);
+            //pc.getDamage(batdamage);
             pc.getHit();
+            pc.getDamage(batdamage - 1);
         }
     }
      public void destory()

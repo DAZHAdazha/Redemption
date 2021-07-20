@@ -11,6 +11,7 @@ public enum nightmareStateType1
 [Serializable]
 public class nightmareParameter1
 {
+    public float attackPoint;
     public int health;
     public float moveSpeed;
     public Transform target;

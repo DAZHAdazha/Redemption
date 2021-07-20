@@ -167,3 +167,4 @@ MonoBehaviour:
   speed: 4
   direction: -1
   anim: {fileID: 0}
+  attackPoint: 1
