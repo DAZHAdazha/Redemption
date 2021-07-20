@@ -479,7 +479,7 @@ MonoBehaviour:
     target: {fileID: 0}
     targetLayer:
       serializedVersion: 2
-      m_Bits: 520
+      m_Bits: 8
     attackPoint: {fileID: 2291992258427867523}
     attackArea: 0.32
     animator: {fileID: 2291992258678720465}

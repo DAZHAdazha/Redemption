@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f546a0cf8071f824aa10d693e4bd49fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitSpeed: 1.5
   floatPoint: {fileID: 7714365123694686899, guid: 7242630b75f7a4b4d8f112670c819f02, type: 3}
   coin: {fileID: 7067323159490205105, guid: baaa9a97b4842a349a67a5fbe8bdf64d, type: 3}
   health: {fileID: 0}
@@ -198,6 +199,9 @@ MonoBehaviour:
     dashLength: 2.2
     dashCoolDown: 0.5
     puzzleAttack: {fileID: 9208505644459173910, guid: 88b95af4e6b8de440aa3099207ff34e4, type: 3}
+    worldBoundaryLeft: {fileID: 0}
+    worldBoundaryRight: {fileID: 0}
+    healthSystem: {fileID: 0}
 --- !u!1 &3854153784934077837
 GameObject:
   m_ObjectHideFlags: 0

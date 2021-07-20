@@ -1,43 +1,52 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class GroundFire : MonoBehaviour
+[Serializable]
+public class GFparameters
 {
-    [Header("动画器")]
     public Animator ani;
 
     public int leftTime = 3;
 
     public float damage = 1f;
 
-    private bool isHurt=false;
+    
+    
+}
+
+public class GroundFire : MonoBehaviour
+{
+    public GFparameters p;
     private PlayerController playerController;
+    private bool isHurt = false;
+
     // Start is called before the first frame update
     void Start()
     {
-        ani = GetComponent<Animator>();
-        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        p.ani = GetComponent<Animator>();
+        
     }
 
 
     private void growFire()
     {
         //Debug.Log("growed");
-        ani.SetBool("growed", true);
+        p.ani.SetBool("growed", true);
 
     }
 
     private void closeTheFire()
     {
-        if(leftTime > 0)
+        if(p.leftTime > 0)
         {
-            leftTime--;
+            p.leftTime--;
             //Debug.Log(leftTime);
         }
         else
         {
-            ani.SetTrigger("Disappear");
+            p.ani.SetTrigger("Disappear");
         }
     }
 
@@ -48,12 +57,15 @@ public class GroundFire : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //注意这里Player物体只能有一个Player Tag （子物体不能使用Player tag） 否则伤害会触发多次
-        if (!isHurt && other.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D" && !playerController.isDefense)
-        {
-            isHurt = true;
-            playerController.getDamage(damage);
-            playerController.blinkPlayer();
+        if (other.CompareTag("Player") && other.GetType().ToString() == "UnityEngine.PolygonCollider2D") {
+            playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+            //注意这里Player物体只能有一个Player Tag （子物体不能使用Player tag） 否则伤害会触发多次
+            if (!isHurt &&  !playerController.isDefense)
+            {
+                isHurt = true;
+                playerController.getDamage(p.damage);
+                playerController.blinkPlayer();
+            }
         }
     }
 }

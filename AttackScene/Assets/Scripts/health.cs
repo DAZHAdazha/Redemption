@@ -46,6 +46,21 @@ public class health : MonoBehaviour
             healthMax = enemy.GetComponent<FSM_Nightmare2>().parameter.health;
             type = 4;
         }
+        else if (enemy.GetComponent<smallStoneMonsterFSM>())
+        {
+            healthMax = enemy.GetComponent<smallStoneMonsterFSM>().p.health;
+            type = 5;
+        }
+        else if (enemy.GetComponent<middleStoneMonsterFSM>())
+        {
+            healthMax = enemy.GetComponent<middleStoneMonsterFSM>().p.health;
+            type = 6;
+        }
+        else if (enemy.GetComponent<bigStoneMonsterFSM>())
+        {
+            healthMax = enemy.GetComponent<bigStoneMonsterFSM>().p.health;
+            type = 7;
+        }
 
         healthCurrent = healthMax;
         updateHealthBar();
@@ -95,6 +110,18 @@ public class health : MonoBehaviour
         else if (type == 4)
         {
             healthCurrent = enemy.GetComponent<FSM_Nightmare2>().parameter.health;
+        }
+        else if (type == 5)
+        {
+            healthCurrent = enemy.GetComponent<smallStoneMonsterFSM>().p.health;
+        }
+        else if (type == 6)
+        {
+            healthCurrent = enemy.GetComponent<middleStoneMonsterFSM>().p.health;
+        }
+        else if (type == 7)
+        {
+            healthCurrent = enemy.GetComponent<bigStoneMonsterFSM>().p.health;
         }
 
         updateHealthBar();

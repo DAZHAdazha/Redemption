@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
         polygonCollider2D = GetComponent<PolygonCollider2D>();
         myRender = GetComponent<Renderer>();
         myShadow = shadow.GetComponent<Shadow>();
+        Shadow.isExist = false;
     }
 
     void Update()
@@ -283,7 +284,8 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Skeleton") || other.CompareTag("PuzzleRobot") || other.CompareTag("Bat") || other.CompareTag("firewarm")
-            || other.CompareTag("Nightmare1") || other.CompareTag("Nightmare2"))
+            || other.CompareTag("Nightmare1") || other.CompareTag("Nightmare2") || other.CompareTag("SmallStone")
+            || other.CompareTag("MiddleStone") || other.CompareTag("BigStone"))
         {
             int type = 0;
             if (other.CompareTag("Skeleton"))
@@ -308,6 +310,18 @@ public class PlayerController : MonoBehaviour
             else if (other.CompareTag("Nightmare2"))
             {
                 type = 5;
+            }
+            else if (other.CompareTag("SmallStone"))
+            {
+                type = 6;
+            }
+            else if (other.CompareTag("MiddleStone"))
+            {
+                type = 7;
+            }
+            else if (other.CompareTag("BigStone"))
+            {
+                type = 8;
             }
             int damage = 0;
             bool isCritical = false;
@@ -375,6 +389,27 @@ public class PlayerController : MonoBehaviour
                 else
                     other.GetComponent<NightMare2>().GetHit(Vector2.left, damage, isCritical);
             }
+            else if (type == 6)
+            {
+                if (transform.localScale.x > 0)
+                    other.GetComponent<SmallStoneMonster>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<SmallStoneMonster>().GetHit(Vector2.left, damage, isCritical);
+            }
+            else if (type == 7)
+            {
+                if (transform.localScale.x > 0)
+                    other.GetComponent<MiddleStoneMonster>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<MiddleStoneMonster>().GetHit(Vector2.left, damage, isCritical);
+            }
+            else if (type == 8)
+            {
+                if (transform.localScale.x > 0)
+                    other.GetComponent<BigStoneMonster>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<BigStoneMonster>().GetHit(Vector2.left, damage, isCritical);
+            }
 
         }
         //TODO
@@ -420,6 +455,24 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
+        if (other.CompareTag("DamageArea"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<smallStoneMonsterFSM>().p.attackValue - 1);
+            }
+            return;
+        }
+        if (other.CompareTag("BigStoneAttack"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<bigStoneMonsterFSM>().p.attackValue - 1);
+            }
+            return;
+        }
         if (other.CompareTag("PuzzleRobotAttack"))
         {
             if (!isDefense)
@@ -427,6 +480,15 @@ public class PlayerController : MonoBehaviour
                 getHit();
                 getDamage(other.gameObject.GetComponent<PuzzleAttack>().attackPoint - 1);
                 other.GetComponent<PuzzleAttack>().anim.Play("Hit");
+            }
+            return;
+        }
+        if (other.CompareTag("MiddleStoneAttack"))
+        {
+            if (!isDefense)
+            {
+                getHit();
+                getDamage(other.gameObject.GetComponentInParent<middleStoneMonsterFSM>().p.attackValue-1);
             }
             return;
         }
@@ -489,8 +551,9 @@ public class PlayerController : MonoBehaviour
         defenseTime = false;
     }
 
-    public void unableDefense(){
+    public void unableDefense(){//todo
         isDefense = false;
+        rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
     private void restart(){
