@@ -30,6 +30,9 @@ public class parameterMiddle
     public float leftChasePosition;
     public float rightChasePosition;
     public float attackCD;
+    public float dodgeDistance;
+    public float jumpSpeed;
+    public float dodgeCd;
 }
 
 public class middleStoneMonsterFSM : MonoBehaviour

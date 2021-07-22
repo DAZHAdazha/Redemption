@@ -11,9 +11,13 @@ public class CoinUI : MonoBehaviour
 
     private void Start() {
         coinNumText = GameObject.Find("CoinNumber").GetComponent<Text>();
+        coinNum = GameSaver.coinNum;
+        setCoinNumText();
     }
 
     public void setCoinNumText(){
         coinNumText.text = coinNum.ToString();
     }
 }
+
+

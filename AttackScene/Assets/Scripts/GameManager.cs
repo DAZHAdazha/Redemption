@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static GameManager instance;
+    private PlayerController playerController;
     private void Awake()
     {
         if(instance != null)
@@ -18,7 +19,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -53,6 +54,19 @@ public class GameManager : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Save()
+    {
+        GameSaver.healthMax = playerController.health;
+        GameSaver.manaMax = playerController.mana;
+        GameSaver.attackLock = playerController.attackLock;
+        GameSaver.duckLock = playerController.duckLock;
+        GameSaver.shadowLock = playerController.shadowLock;
+        GameSaver.bonusLock = playerController.bonusLock;
+        GameSaver.defenseLock = playerController.defenseLock;
+        GameSaver.coinNum = CoinUI.coinNum;
+    }
+
 
 
 //application.Quit

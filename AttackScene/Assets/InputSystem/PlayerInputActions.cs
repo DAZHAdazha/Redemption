@@ -132,61 +132,6 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": ""Arrow"",
-                    ""id"": ""c4f4f776-1a46-407f-ae55-257d388a6a74"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""dfa7f97c-01fb-47ee-ba29-b4b17e9d17a9"",
-                    ""path"": ""<Keyboard>/upArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""323af038-fa81-45c7-9a70-cbe6a1588280"",
-                    ""path"": ""<Keyboard>/downArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""left"",
-                    ""id"": ""d7f719e5-4688-4368-ba56-220b5d7673c0"",
-                    ""path"": ""<Keyboard>/leftArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""right"",
-                    ""id"": ""cee7c2f3-d038-4e2c-95af-1e21627bd8ff"",
-                    ""path"": ""<Keyboard>/rightArrow"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""Keyboard"",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""cross"",
                     ""id"": ""8f46ee93-3246-4768-8124-e8d2d634e95b"",
                     ""path"": ""2DVector"",
@@ -310,7 +255,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""12ee9a97-75fe-4801-898e-41a436eb0ac2"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/hat/up"",
+                    ""path"": ""<AndroidGamepadXboxController>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -321,7 +266,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""ef4d1dbc-b25c-42cd-a8bd-cb997eadb7f8"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/hat/down"",
+                    ""path"": ""<AndroidGamepadXboxController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -332,7 +277,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""5b68e2c4-da44-4daf-9fd6-8dc7fa0880b4"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/hat/left"",
+                    ""path"": ""<AndroidGamepadXboxController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -343,7 +288,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""25582d98-e605-441c-aaff-d36ea4556569"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/hat/right"",
+                    ""path"": ""<AndroidGamepadXboxController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -365,7 +310,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""d775426b-938d-417f-abef-780e28c4bad9"",
-                    ""path"": ""<Joystick>/stick/up"",
+                    ""path"": ""<XInputController>/leftStick/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -376,7 +321,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""down"",
                     ""id"": ""bee47864-0437-4e62-9930-c94c703a23b2"",
-                    ""path"": ""<Joystick>/stick/down"",
+                    ""path"": ""<XInputController>/leftStick/down"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -387,7 +332,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""6efbf576-c3a4-43f3-8c00-d78819a45a57"",
-                    ""path"": ""<Joystick>/stick/left"",
+                    ""path"": ""<XInputController>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -398,7 +343,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""7f815dce-27b6-476f-b8a2-55d9b263b88b"",
-                    ""path"": ""<Joystick>/stick/right"",
+                    ""path"": ""<XInputController>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -431,7 +376,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""24c7ccb0-712d-443d-8a7b-c817f45d26f3"",
-                    ""path"": ""<Joystick>/trigger"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -464,7 +409,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9b6e62fc-dbc8-484f-8ac5-9ac5fe55323b"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/button4"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -497,7 +442,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a618aade-cbb5-4d98-83f6-2797469ffd9b"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/button5"",
+                    ""path"": ""<XInputController>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -530,7 +475,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""150c6e9b-379a-411c-9dcf-a7285588272d"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/button2"",
+                    ""path"": ""<XInputController>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -563,7 +508,7 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3fb8209e-e7c8-40c3-b776-8cf5d0bd6618"",
-                    ""path"": ""<HID::HJC Game BETOP BFM GAMEPAD>/button9"",
+                    ""path"": ""<XInputController>/leftTrigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""XBOX"",
@@ -578,6 +523,28 @@ public class @PlayerInputActions : IInputActionCollection, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
+                    ""action"": ""Shadow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""bd6c53a7-af39-4f1a-82c8-c598ba0a4715"",
+                    ""path"": ""<DualShockGamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PS4"",
+                    ""action"": ""Shadow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5f2f43a8-32f7-49b9-8d4d-a64fc2772252"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XBOX"",
                     ""action"": ""Shadow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

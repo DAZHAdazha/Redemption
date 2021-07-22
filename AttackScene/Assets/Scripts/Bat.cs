@@ -19,6 +19,7 @@ public class Bat : MonoBehaviour
     public Transform leftDownPos;
     public Transform rightupPos;
     public float hitSpeed;
+    public float hitTime;
     //private Vector2 direction;
 
     public GameObject bloodEffect;
@@ -28,6 +29,11 @@ public class Bat : MonoBehaviour
     public GameObject coin;//掉落物品
 
     private PlayerController pc;
+    private bool getHit;
+    private Vector2 direction;
+    new private Rigidbody2D rigidbody;
+    private Animator hitAnimator;
+
 
 
 
@@ -40,6 +46,8 @@ public class Bat : MonoBehaviour
 
         waitTime=startWaitTime;
         movePos.position = GetRandomPos();
+        rigidbody = transform.GetComponent<Rigidbody2D>();
+        hitAnimator = transform.GetChild(0).GetComponent<Animator>();
     }
     // Update is called once per frame
     public void Update()
@@ -51,23 +59,32 @@ public class Bat : MonoBehaviour
    
     void Move()
     {
-        if(movePos.position.x < transform.position.x)
-            transform.localScale= new Vector2(-1,1);
-        else
-            transform.localScale = new Vector2(1,1);
-        transform.position=Vector2.MoveTowards(transform.position,movePos.position,speed*Time.deltaTime);
-        if(Vector2.Distance(transform.position,movePos.position)<0.1f)
+        
+        if (!getHit)
         {
-            if(waitTime<=0)
-            {
-                movePos.position=GetRandomPos();
-                waitTime=startWaitTime;
-            }
+            if (movePos.position.x < transform.position.x)
+                transform.localScale = new Vector2(-1, 1);
             else
+                transform.localScale = new Vector2(1, 1);
+            transform.position = Vector2.MoveTowards(transform.position, movePos.position, speed * Time.deltaTime);
+            if (Vector2.Distance(transform.position, movePos.position) < 0.1f)
             {
-                waitTime-=Time.deltaTime;
+                if (waitTime <= 0)
+                {
+                    movePos.position = GetRandomPos();
+                    waitTime = startWaitTime;
+                }
+                else
+                {
+                    waitTime -= Time.deltaTime;
+                }
             }
         }
+        else
+        {
+            rigidbody.velocity = direction * hitSpeed;
+        }
+        
     }
     void Flashcolor(float time)
     {
@@ -78,8 +95,18 @@ public class Bat : MonoBehaviour
     {
         sr.color = originalColor;
     }
-    public void GetHit(int damage, bool isCritical)
+
+    private void resolveHit()
     {
+        getHit = false;
+        rigidbody.velocity = new Vector2(0, 0);
+    }
+
+    public void GetHit(Vector2 direction, int damage, bool isCritical)
+    {
+        getHit = true;
+        this.direction = direction;
+
         bathealth -= damage;
         Flashcolor(flashtime);
         Instantiate(bloodEffect,transform.position,Quaternion.identity);
@@ -89,7 +116,9 @@ public class Bat : MonoBehaviour
         {
             gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255, 0, 0, 255);
         }
+        hitAnimator.SetTrigger("Hit");
         //health.GetComponent<health>().callUpdateHealth();
+        Invoke("resolveHit", hitTime);
 
     }
     Vector2 GetRandomPos()

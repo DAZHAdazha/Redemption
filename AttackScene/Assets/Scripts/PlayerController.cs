@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
     public bool isPuzzled;
     public Shadow myShadow;
     public GameObject status;
+    public Vector2 move;
+
 
     private float timer;
     private bool isAttack;
@@ -68,15 +70,24 @@ public class PlayerController : MonoBehaviour
     //private ScreenFlash screenFlash;
     private bool isOneWayPlatform; 
     private PlayerInputActions controls;
-    private Vector2 move;
     private PolygonCollider2D polygonCollider2D;
     private Renderer myRender;
     private HealthSystem myHealSystem;
+    
 
     
 
 
     private void Awake() {
+        //加载存档，需要在awake中
+        health = GameSaver.healthMax;
+        mana = GameSaver.manaMax;
+        attackLock = GameSaver.attackLock;
+        duckLock = GameSaver.duckLock;
+        shadowLock = GameSaver.shadowLock;
+        defenseLock = GameSaver.defenseLock;
+        bonusLock = GameSaver.bonusLock;
+
 
         //支持手柄
         controls = new PlayerInputActions();
@@ -106,6 +117,7 @@ public class PlayerController : MonoBehaviour
         myRender = GetComponent<Renderer>();
         myShadow = shadow.GetComponent<Shadow>();
         Shadow.isExist = false;
+
     }
 
     void Update()
@@ -153,7 +165,7 @@ public class PlayerController : MonoBehaviour
                     transform.Find("defense").gameObject.SetActive(true);
                     transform.Find("defense").GetComponent<Animator>().Play("Hit");
                     isHurt = false;
-                    animator.SetBool("Hurt",false);
+                    animator.SetBool("Hurt", false);
                     rigidbody.constraints = RigidbodyConstraints2D.None;
                 }
                 if(bonusLock && bonusActive && bonusTime && !isBonus){
@@ -166,7 +178,7 @@ public class PlayerController : MonoBehaviour
                 isDuck = true;
                 animator.SetBool("Duck",true);
                 rigidbody.velocity = new Vector2((transform.localScale.x>0?1:-1) * duckSpeed, 0);
-                rigidbody.isKinematic = true;
+                //rigidbody.isKinematic = true;
                 if(!isGround){
                     ableToDuck = false;
                 }
@@ -366,7 +378,10 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 2)
             {
-                 other.GetComponent<Bat>().GetHit(damage, isCritical);
+                if (transform.localScale.x > 0)
+                    other.GetComponent<Bat>().GetHit(Vector2.right, damage, isCritical);
+                else
+                    other.GetComponent<Bat>().GetHit(Vector2.left, damage, isCritical);
             }
             else if (type == 3)
             {
@@ -502,7 +517,7 @@ public class PlayerController : MonoBehaviour
     public void ResolveDuck(){
         isDuck = false;
         animator.SetBool("Duck",false);
-        rigidbody.isKinematic = false;
+        //rigidbody.isKinematic = false;
         transform.Find("BonusDuck").gameObject.SetActive(false);
         if(isBonus){
             transform.Find("Bonus").gameObject.SetActive(true);
@@ -529,19 +544,25 @@ public class PlayerController : MonoBehaviour
     public void getHit() {
         isHurt = true;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
-        animator.SetBool("Hurt",true);
+        animator.SetBool("Hurt", true);
+
+        ///!!!!修改僵直时长
+        Invoke("resolveHurt",0.3f);
+
     }
 
     public void resolveHurt(){
-        isHurt = false;
-        animator.SetBool("Hurt",false);
         rigidbody.constraints = RigidbodyConstraints2D.None;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
-        if(!animator.GetBool("isGround")){
+        isHurt = false;
+        animator.SetBool("Hurt", false);
+        if (!animator.GetBool("isGround")){
             transform.localPosition = new Vector2(transform.localPosition.x,transform.localPosition.y + 0.001f);
         }
         
     }
+
+
 
     public void startDefenseTime(){
         defenseTime = true;
@@ -551,7 +572,7 @@ public class PlayerController : MonoBehaviour
         defenseTime = false;
     }
 
-    public void unableDefense(){//todo
+    public void unableDefense(){
         isDefense = false;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
     }

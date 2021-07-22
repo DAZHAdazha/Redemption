@@ -7,8 +7,11 @@ public class NightMare1 : MonoBehaviour
     public float hitSpeed;
     public GameObject floatPoint;
     public GameObject health;
-    private Animator animator;
 
+    public GameObject stage2;
+    public GameObject stage2Canvas;
+
+    private Animator animator;
     private Vector2 direction;
     private bool isHit;
     private AnimatorStateInfo info;
@@ -78,8 +81,13 @@ public class NightMare1 : MonoBehaviour
 
     public void destory()
     {
+        stage2.SetActive(true);
+        stage2Canvas.SetActive(true);
+        stage2.gameObject.transform.position = new Vector2(gameObject.transform.position.x, gameObject.transform.position.y + 5f);
+
         Destroy(health.transform.parent.gameObject);
         Destroy(gameObject);
+
     }
 
 

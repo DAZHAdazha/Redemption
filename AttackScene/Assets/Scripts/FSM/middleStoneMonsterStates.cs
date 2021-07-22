@@ -32,7 +32,7 @@ public class MiddleidleState : IState
             return;
         }
         timer += Time.deltaTime;
-        
+
         if (p.target != null &&
             p.target.position.x >= p.leftChasePosition &&
             p.target.position.x <= p.rightChasePosition)
@@ -94,7 +94,7 @@ public class MiddlepatrolState : IState
                 break;
         }
 
-        
+
 
         if (p.target != null && p.target.position.x >= p.leftChasePosition &&
             p.target.position.x <= p.rightChasePosition)
@@ -162,7 +162,7 @@ public class MiddlechaseState : IState
 
         if (Physics2D.OverlapCircle(p.attackPoint.position, p.attackArea, p.targetLayer))
         {
-            Debug.Log("enter the Attack zone");
+            //Debug.Log("enter the Attack zone");
             manager.transitionState(MiddlestateType.attack);
         }
 
@@ -179,6 +179,7 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
     private AnimatorStateInfo info;
     private int nextAttack;
     private float timer;
+    private float dodgeTimer;
     public MiddleattackState(middleStoneMonsterFSM manager)
     {
         this.manager = manager;
@@ -197,11 +198,21 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
 
     public void OnUpdate()
     {
-        
+
         info = p.ani.GetCurrentAnimatorStateInfo(0);
-        if(info.normalizedTime > .95
+        if (dodgeTimer > p.dodgeCd && info.normalizedTime > .95f)
+        {
+            jumpAway();
+
+            manager.flipTo(p.target.position.x);
+            dodgeTimer = 0;
+        }
+
+        info = p.ani.GetCurrentAnimatorStateInfo(0);
+        if (info.normalizedTime > .95
             && Physics2D.OverlapCircle(p.attackPoint.position, p.attackArea, p.targetLayer)
-            && timer <= p.attackCD){
+            && timer <= p.attackCD)
+        {
             if (p.getHit == true)
             {
                 manager.transitionState(MiddlestateType.hit);
@@ -209,15 +220,15 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
             }
             p.ani.Play("middleIdle");
         }
-        if (info.normalizedTime > .95 
+        if (info.normalizedTime > .95
             && Physics2D.OverlapCircle(p.attackPoint.position, p.attackArea, p.targetLayer)
             && timer > p.attackCD)
         {
             timer = 0;
             chooseAttack();
-            
+
         }
-        if(info.normalizedTime > .95
+        if (info.normalizedTime > .95
             && !Physics2D.OverlapCircle(p.attackPoint.position, p.attackArea, p.targetLayer))
         {
             if (p.getHit == true)
@@ -228,6 +239,7 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
             manager.transitionState(MiddlestateType.chase);
         }
         timer += Time.deltaTime;
+        dodgeTimer += Time.deltaTime;
     }
 
     private void chooseAttack()
@@ -245,6 +257,26 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
         else
         {
             p.ani.Play("middleAttack2");
+        }
+    }
+
+    private void jumpAway()
+    {
+
+        if (Mathf.Abs(manager.transform.position.x - p.target.position.x) < p.dodgeDistance)
+        {
+            GameObject hero = GameObject.FindWithTag("Player");
+            if (manager.transform.position.x > p.target.position.x)
+            {
+                p.rb.velocity = new Vector2(p.jumpSpeed, 0);
+
+            }
+            else
+            {
+                p.rb.velocity = new Vector2(-p.jumpSpeed, 0);
+
+            }
+            p.ani.Play("middleDodge");
         }
     }
 }

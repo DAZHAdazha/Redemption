@@ -204,7 +204,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5473630093955831347, guid: ea724dfe5270d9645bbdb79998689ed4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -35.95
+      value: -35.94995
       objectReference: {fileID: 0}
     - target: {fileID: 5473630093955831347, guid: ea724dfe5270d9645bbdb79998689ed4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -531,7 +531,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 3
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: e3b9ef519f1f3fc4083de9f78339f59a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -5110,6 +5110,9 @@ MonoBehaviour:
     leftChasePosition: 0
     rightChasePosition: 0
     attackCD: 3
+    dodgeDistance: 2
+    jumpSpeed: 5
+    dodgeCd: 1.5
   damageRegionA1P1: {fileID: 3659065943094339144}
   damageRegionA1P2: {fileID: 3659065943047376371}
   damageRegionA1P3: {fileID: 3659065942813407101}
