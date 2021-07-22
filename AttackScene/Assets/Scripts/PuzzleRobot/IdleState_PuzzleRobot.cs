@@ -8,7 +8,6 @@ public class myIdleState : IState
     private FSM_PuzzleRobot manager;
     private myParameter parameter;
 
-    //private float timer;
     public myIdleState(FSM_PuzzleRobot manager)
     {
         this.manager = manager;
@@ -26,28 +25,11 @@ public class myIdleState : IState
         {
             manager.TransitionState(myStateType.React);
         }
-        //timer += Time.deltaTime;
 
-        //if (parameter.getHit)
-        //{
-        //    manager.TransitionState(myStateType.Hit);
-        //}
-        //if (parameter.target != null &&
-        //    parameter.target.position.x >= parameter.chasePoints[0].position.x &&
-        //    parameter.target.position.x <= parameter.chasePoints[1].position.x)
-        //{
-        //    manager.TransitionState(myStateType.React);
-        //}
-        //if (timer >= parameter.idleTime)
-        //{
-        //    manager.TransitionState(myStateType.
-        //    );
-        //}
     }
 
     public void OnExit()
     {
-        //timer = 0;
     }
 }
 
@@ -77,6 +59,7 @@ public class myReactState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(myStateType.Hit);
+            return;
         }
 
         if (timer >= parameter.idleTime)
@@ -84,11 +67,6 @@ public class myReactState : IState
             manager.TransitionState(myStateType.Patrol);
         }
 
-
-        //if (info.normalizedTime >= .95f)
-        //{
-        //    manager.TransitionState(myStateType.Chase);
-        //}
     }
 
     public void OnExit()
@@ -130,6 +108,7 @@ public class myPatrolState : IState
             dashCoolDownTimer = 0f;
             //Debug.Log("Dash");
             manager.TransitionState(myStateType.Dash);
+            return;
 
         }
         else if(distance>= parameter.dangerArea && distance <= parameter.runArea)
@@ -151,6 +130,7 @@ public class myPatrolState : IState
             manager.FlipTo(parameter.target);
             //Debug.Log("Shot");
             manager.TransitionState(myStateType.Attack);
+            return;
         }
         else
         {
@@ -165,35 +145,10 @@ public class myPatrolState : IState
             }
         }
         
-    //manager.FlipTo(parameter.patrolPoints[patrolPosition]);
-
-    //manager.transform.position = Vector2.MoveTowards(manager.transform.position,
-    //    parameter.patrolPoints[patrolPosition].position, parameter.moveSpeed * Time.deltaTime);
-
-    //if (parameter.getHit)
-    //{
-    //    manager.TransitionState(myStateType.Hit);
-    //}
-    //if (parameter.target != null &&
-    //    parameter.target.position.x >= parameter.chasePoints[0].position.x &&
-    //    parameter.target.position.x <= parameter.chasePoints[1].position.x)
-    //{
-    //    manager.TransitionState(myStateType.React);
-    //}
-    //if (Vector2.Distance(manager.transform.position, parameter.patrolPoints[patrolPosition].position) < .1f)
-    //{
-    //    manager.TransitionState(myStateType.Idle);
-    //}
 }
 
     public void OnExit()
     {
-        //patrolPosition++;
-
-        //if (patrolPosition >= parameter.patrolPoints.Length)
-        //{
-        //    patrolPosition = 0;
-        //}
 
     }
 }
@@ -226,13 +181,11 @@ public class myDashState : IState
 
     public void OnUpdate()
     {
-        //manager.FlipTo(parameter.target);
-        //if (parameter.target)
-        //    manager.transform.position = Vector2.MoveTowards(manager.transform.position,
-        //    new Vector2(parameter.target.position.x, manager.transform.position.y), parameter.chaseSpeed * Time.deltaTime);
+
         if (parameter.getHit)
         {
             manager.TransitionState(myStateType.Hit);
+            return;
         }
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime >= .95f)
@@ -252,16 +205,6 @@ public class myDashState : IState
             manager.TransitionState(myStateType.Patrol);
             
         }
-        //if (parameter.target == null ||
-        //    manager.transform.position.x < parameter.chasePoints[0].position.x ||
-        //    manager.transform.position.x > parameter.chasePoints[1].position.x)
-        //{
-        //    manager.TransitionState(myStateType.Idle);
-        //}
-        //if (Physics2D.OverlapCircle(parameter.attackPoint.position, parameter.attackArea, parameter.targetLayer))
-        //{
-        //    manager.TransitionState(myStateType.Attack);
-        //}
     }
 
     public void OnExit()
@@ -296,6 +239,7 @@ public class myAttackState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(myStateType.Hit);
+            return;
         }
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
         if (info.normalizedTime >= .95f)
@@ -333,11 +277,10 @@ public class myHitState : IState
         if (parameter.health <= 0)
         {
             manager.TransitionState(myStateType.Death);
+            return;
         }
         if (info.normalizedTime >= .95f)
         {
-            //parameter.target = GameObject.FindWithTag("Player").transform;
-
             manager.TransitionState(myStateType.Patrol);
         }
     }

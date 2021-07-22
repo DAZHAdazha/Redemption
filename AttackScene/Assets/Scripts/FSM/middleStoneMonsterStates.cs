@@ -38,6 +38,7 @@ public class MiddleidleState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(MiddlestateType.chase);
+            return;
         }
         if (timer > p.idleTime)
         {
@@ -100,6 +101,7 @@ public class MiddlepatrolState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(MiddlestateType.chase);
+            return;
         }
 
         manager.transform.position = Vector2.MoveTowards(manager.transform.position,
@@ -265,7 +267,7 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
 
         if (Mathf.Abs(manager.transform.position.x - p.target.position.x) < p.dodgeDistance)
         {
-            GameObject hero = GameObject.FindWithTag("Player");
+            //GameObject hero = GameObject.FindWithTag("Player");
             if (manager.transform.position.x > p.target.position.x)
             {
                 p.rb.velocity = new Vector2(p.jumpSpeed, 0);
@@ -312,6 +314,7 @@ public class MiddlehitState : IState
         if (p.health <= 0)
         {
             manager.transitionState(MiddlestateType.death);
+            return;
         }
         if (info.normalizedTime > .95f)
         {

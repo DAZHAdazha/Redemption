@@ -469,6 +469,7 @@ MonoBehaviour:
   isPuzzled: 0
   myShadow: {fileID: 0}
   status: {fileID: 501307524}
+  move: {x: 0, y: 0}
   slowAirSpeed: 0.1
 --- !u!95 &162971557
 Animator:
@@ -5038,7 +5039,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1729545712785205798, guid: 3b4cf315e48578041978938c6259a40b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -6419,7 +6420,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 8793639957104055765, guid: 8223b90fdd9a96e458fbd48827396511, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

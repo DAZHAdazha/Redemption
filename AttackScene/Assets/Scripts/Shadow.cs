@@ -78,7 +78,7 @@ public class Shadow : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target,speed*Time.deltaTime);
         if(Vector3.Distance(transform.position,target)<0.1f){
             Destroy(gameObject);
-            isExist = false;
+            
             Instantiate(effect, transform.position, Quaternion.identity);
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));
 
@@ -94,7 +94,6 @@ public class Shadow : MonoBehaviour
         if(other.gameObject.layer==LayerMask.NameToLayer("Ground") || other.gameObject.layer==LayerMask.NameToLayer("OneWayPlatform")
         || other.gameObject.layer==LayerMask.NameToLayer("WorldBoundary")){
             Destroy(gameObject);
-            isExist = false;
 
             Instantiate(effect, transform.position, Quaternion.identity);
             playerTransform.GetComponent<PlayerController>().playerShowUp(new Vector2(transform.position.x, transform.position.y + 0.4f));

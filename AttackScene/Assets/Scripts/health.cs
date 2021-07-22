@@ -77,6 +77,14 @@ public class health : MonoBehaviour
         {
             currentPosition = new Vector2(enemy.transform.position.x-0.2f, enemy.transform.position.y + 2f);
         }
+        else if (type == 5)
+        {
+            currentPosition = new Vector2(enemy.transform.position.x + 0.2f, enemy.transform.position.y + 2f);
+        }
+        else if (type == 6)
+        {
+            currentPosition = new Vector2(enemy.transform.position.x + 0.2f, enemy.transform.position.y + 0.3f);
+        }
         else
         {
             currentPosition = new Vector2(enemy.transform.position.x + 0.2f, enemy.transform.position.y + 1.3f);

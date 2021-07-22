@@ -61,6 +61,7 @@ public class PatrolStateNightmare1 : IState
         if (parameter.getHit && !parameter.unattackable)
         {
             manager.TransitionState(nightmareStateType1.Hit);
+            return;
         }
 
         //ÏÞÖÆÎ»ÖÃ
@@ -83,6 +84,7 @@ public class PatrolStateNightmare1 : IState
         if (timer > parameter.patrolTime && distance >= parameter.attackArea)
         {
             manager.TransitionState(nightmareStateType1.Vanish);
+            return;
         }
 
         if(distance < parameter.attackArea)
@@ -211,6 +213,7 @@ public class AttackStateNightmare1 : IState
         if (parameter.getHit && !parameter.unattackable)
         {
             manager.TransitionState(nightmareStateType1.Hit);
+            return;
         }
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
        
@@ -259,6 +262,7 @@ public class HitStateNightmare1 : IState
         if (parameter.health <= 0)
         {
             manager.TransitionState(nightmareStateType1.Death);
+            return;
         }
         else
         {
@@ -267,6 +271,7 @@ public class HitStateNightmare1 : IState
                 if (info.normalizedTime >= .95f)
                 {
                     manager.TransitionState(nightmareStateType1.Vanish);
+                    return;
                 }
             }
             else

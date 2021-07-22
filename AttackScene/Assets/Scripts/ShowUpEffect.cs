@@ -29,6 +29,7 @@ public class ShowUpEffect : MonoBehaviour
         playerTransform.gameObject.SetActive(true);
         playerController.move = move;
         Destroy(gameObject);
+        Shadow.isExist = false;
     }
 
 

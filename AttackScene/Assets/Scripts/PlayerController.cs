@@ -73,9 +73,8 @@ public class PlayerController : MonoBehaviour
     private PolygonCollider2D polygonCollider2D;
     private Renderer myRender;
     private HealthSystem myHealSystem;
-    
 
-    
+
 
 
     private void Awake() {
@@ -87,6 +86,7 @@ public class PlayerController : MonoBehaviour
         shadowLock = GameSaver.shadowLock;
         defenseLock = GameSaver.defenseLock;
         bonusLock = GameSaver.bonusLock;
+        CoinUI.coinNum = GameSaver.coinNum;
 
 
         //支持手柄
@@ -150,7 +150,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if( shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist() && myHealSystem.manaPoint>=1f){
+        if( shadowLock && controls.GamePlay.Shadow.triggered && !myShadow.getExist() && myHealSystem.manaPoint>=1f && !isMovingPlatform){
             myHealSystem.UseMana(1f);//每次消耗一点魔法值
             GameObject thisShadow = Instantiate(shadow,new Vector2(transform.position.x,transform.position.y-0.4f) ,Quaternion.identity);
             thisShadow.GetComponent<Shadow>().setMove(move,transform.localScale.x);
@@ -488,6 +488,16 @@ public class PlayerController : MonoBehaviour
             }
             return;
         }
+
+        if (other.CompareTag("iceFall"))
+        {
+            if (!isDefense)
+            {
+                getHit();//iceFall伤害为1
+            }
+            return;
+        }
+
         if (other.CompareTag("PuzzleRobotAttack"))
         {
             if (!isDefense)
@@ -640,8 +650,8 @@ public class PlayerController : MonoBehaviour
     public void playerShowUp(Vector3 target) {
         AttackOver();
         transform.position = target;
-        polygonCollider2D.enabled = true;
         resolveHurt();
+        polygonCollider2D.enabled = true;
     }
 
 }

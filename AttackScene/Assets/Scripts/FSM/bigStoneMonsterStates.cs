@@ -38,6 +38,7 @@ public class BigidleState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(BigstateType.chase);
+            return;
         }
         if (timer > p.idleTime)
         {
@@ -99,6 +100,7 @@ public class BigpatrolState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(BigstateType.chase);
+            return;
         }
 
         manager.transform.position = Vector2.MoveTowards(manager.transform.position,
@@ -161,7 +163,7 @@ public class BigchaseState : IState
 
         if (Physics2D.OverlapCircle(p.attackPoint.position, p.attackArea, p.targetLayer))
         {
-            Debug.Log("enter the Attack zone");
+            //Debug.Log("enter the Attack zone");
             manager.transitionState(BigstateType.attack);
         }
 
@@ -176,7 +178,7 @@ public class BigattackState : IState//¹¥»÷×´Ì¬
     private parameterBig p;
 
     private AnimatorStateInfo info;
-    private int nextAttack;
+    //private int nextAttack;
     private float timer;
     public BigattackState(bigStoneMonsterFSM manager)
     {
@@ -203,6 +205,7 @@ public class BigattackState : IState//¹¥»÷×´Ì¬
             if(p.health <= 0)
             {
                 manager.transitionState(BigstateType.death);
+                return;
             }
         }
 
@@ -279,6 +282,7 @@ public class BighitState : IState
         if (p.health <= 0)
         {
             manager.transitionState(BigstateType.death);
+            return;
         }
         if (info.normalizedTime > .95f)
         {

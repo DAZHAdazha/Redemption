@@ -91,11 +91,6 @@ public class PatrolStateNightmare2 : IState
         }
 
 
-        //if (timer > parameter.patrolTime)
-        //{
-        //    manager.TransitionState(nightmareStateType2.Vanish);
-        //}
-
         if (parameter.health<=parameter.dangerHealth && defenseCoolDown >= parameter.defenseCoolDownTime)
         {
             manager.TransitionState(nightmareStateType2.Defense);
@@ -106,10 +101,14 @@ public class PatrolStateNightmare2 : IState
         if (distance <= parameter.sweepArea)
         {
             manager.TransitionState(nightmareStateType2.Sweep);
-        }else if(distance> parameter.sweepArea && distance <= parameter.attackArea)
+            return;
+        }
+        else if(distance> parameter.sweepArea && distance <= parameter.attackArea)
         {
             manager.TransitionState(nightmareStateType2.Attack);
-        }else if(distance > parameter.attackArea && timer > parameter.patrolTime)
+            return;
+        }
+        else if(distance > parameter.attackArea && timer > parameter.patrolTime)
         {
             manager.TransitionState(nightmareStateType2.Vanish);
         }
@@ -221,6 +220,7 @@ public class AttackStateNightmare2 : IState
         if (parameter.getHit)
         {
             manager.TransitionState(nightmareStateType2.Hit);
+            return;
         }
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
        
@@ -260,6 +260,7 @@ public class HitStateNightmare2 : IState
         if (parameter.health <= 0)
         {
             manager.TransitionState(nightmareStateType2.Death);
+            return;
         }
         else
         {
@@ -268,6 +269,7 @@ public class HitStateNightmare2 : IState
                 if (info.normalizedTime >= .95f)
                 {
                     manager.TransitionState(nightmareStateType2.Sweep);
+                    return;
                 }
             }
             else
@@ -340,6 +342,7 @@ public class SweepStateNightmare2 : IState
         if (parameter.getHit)
         {
             manager.TransitionState(nightmareStateType2.Hit);
+            return;
         }
         timer += Time.deltaTime;
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);

@@ -12,6 +12,7 @@ public class MovingPlatform : MonoBehaviour
     private float waitTimeCurrent;
     private Transform currentDefTransform;
     private int posIndex;
+    private PlayerController playerController;
 
     void Start()
     {
@@ -19,6 +20,7 @@ public class MovingPlatform : MonoBehaviour
         //将左右两个点的子类分离
         transform.DetachChildren();
         waitTimeCurrent = waitTime;
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -43,14 +45,22 @@ public class MovingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other) {
         currentDefTransform = other.transform.parent;
-        if(other.transform.tag =="Player" || other.transform.tag == "Item"){
-            other.gameObject.transform.parent = gameObject.transform;
+        if(other.transform.tag =="Player"){
+            playerController.isMovingPlatform = true;
+            if(!playerController.myShadow.getExist())
+                other.gameObject.transform.parent = gameObject.transform;
         }
     }
 
     private void OnCollisionExit2D(Collision2D other) {
-        if(other.transform.tag=="Player" || other.transform.tag == "Item"){
-            other.gameObject.transform.parent = currentDefTransform;
+        if(other.transform.tag=="Player"){
+            playerController.isMovingPlatform = false;
+            if(!playerController.myShadow.getExist())
+                other.gameObject.transform.parent = currentDefTransform;
+
         }
     }
+
+
+
 }

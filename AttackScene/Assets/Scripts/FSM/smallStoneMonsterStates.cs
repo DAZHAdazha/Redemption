@@ -37,6 +37,7 @@ public class idleState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(stateType.chase);
+            return;
         }
         if(timer > p.idleTime)
         {
@@ -94,15 +95,12 @@ public class patrolState : IState
                 break;
         }
 
-        if (p.getHit == true)
-        {
-            manager.transitionState(stateType.hit);
-        }
 
         if(p.target != null && p.target.position.x >= p.leftChasePosition &&
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(stateType.chase);
+            return;
         }
 
         manager.transform.position = Vector2.MoveTowards(manager.transform.position,
@@ -121,7 +119,7 @@ public class chaseState : IState
 
     private smallStoneMonsterFSM manager;
     private parameter p;
-    private float distance;
+    //private float distance;
 
     public chaseState(smallStoneMonsterFSM manager)
     {
@@ -241,6 +239,7 @@ public class hitState : IState
         if(p.health <= 0)
         {
             manager.transitionState(stateType.death);
+            return;
         }
         if(info.normalizedTime > .95f)
         {

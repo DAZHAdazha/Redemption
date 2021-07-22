@@ -25,12 +25,14 @@ public class IdleState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(StateType.Hit);
+            return;
         }
         if (parameter.target != null &&
             parameter.target.position.x >= parameter.chasePoints[0].position.x &&
             parameter.target.position.x <= parameter.chasePoints[1].position.x)
         {
             manager.TransitionState(StateType.React);
+            return;
         }
         if (timer >= parameter.idleTime)
         {
@@ -70,12 +72,14 @@ public class PatrolState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(StateType.Hit);
+            return;
         }
         if (parameter.target != null &&
             parameter.target.position.x >= parameter.chasePoints[0].position.x &&
             parameter.target.position.x <= parameter.chasePoints[1].position.x)
         {
             manager.TransitionState(StateType.React);
+            return;
         }
         if (Vector2.Distance(manager.transform.position, parameter.patrolPoints[patrolPosition].position) < .1f)
         {
@@ -119,12 +123,14 @@ public class ChaseState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(StateType.Hit);
+            return;
         }
         if (parameter.target == null ||
             manager.transform.position.x < parameter.chasePoints[0].position.x ||
             manager.transform.position.x > parameter.chasePoints[1].position.x)
         {
             manager.TransitionState(StateType.Idle);
+            return;
         }
         if (Physics2D.OverlapCircle(parameter.attackPoint.position, parameter.attackArea, parameter.targetLayer))
         {
@@ -161,6 +167,7 @@ public class ReactState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(StateType.Hit);
+            return;
         }
         if (info.normalizedTime >= .95f)
         {
@@ -197,6 +204,7 @@ public class AttackState : IState
         if (parameter.getHit)
         {
             manager.TransitionState(StateType.Hit);
+            return;
         }
         if (info.normalizedTime >= .95f)
         {
@@ -233,10 +241,11 @@ public class HitState : IState
         if (parameter.health <= 0)
         {
             manager.TransitionState(StateType.Death);
+            return;
         }
         if (info.normalizedTime >= .95f)
         {
-            parameter.target = GameObject.FindWithTag("Player").transform;
+            //parameter.target = GameObject.FindWithTag("Player").transform;
 
             manager.TransitionState(StateType.Chase);
         }
