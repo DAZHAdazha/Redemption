@@ -264,22 +264,26 @@ public class MiddleattackState : IState//¹¥»÷×´Ì¬
 
     private void jumpAway()
     {
-
-        if (Mathf.Abs(manager.transform.position.x - p.target.position.x) < p.dodgeDistance)
+        if (p.target)
         {
-            //GameObject hero = GameObject.FindWithTag("Player");
-            if (manager.transform.position.x > p.target.position.x)
+            if (Mathf.Abs(manager.transform.position.x - p.target.position.x) < p.dodgeDistance)
             {
-                p.rb.velocity = new Vector2(p.jumpSpeed, 0);
+                //GameObject hero = GameObject.FindWithTag("Player");
+                if (manager.transform.position.x > p.target.position.x)
+                {
+                    p.rb.velocity = new Vector2(p.jumpSpeed, 0);
 
-            }
-            else
-            {
-                p.rb.velocity = new Vector2(-p.jumpSpeed, 0);
+                }
+                else
+                {
+                    p.rb.velocity = new Vector2(-p.jumpSpeed, 0);
 
+                }
+                p.ani.Play("middleDodge");
             }
-            p.ani.Play("middleDodge");
         }
+
+        
     }
 }
 

@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class GameSaver
 {
-    public static float healthMax = 20;
-    public static float manaMax = 15;
-    public static int coinNum = 10;
+    public static float healthMax = 15;
+    public static float manaMax = 10;
+    public static int coinNum = 100;
     public static bool attackLock = true;
     public static bool duckLock = true;
     public static bool shadowLock = true;
     public static bool bonusLock = true;
     public static bool defenseLock = true;
+
+
 
     public static int difficulty;
     public static Dictionary<int, Dictionary<string, int>> difficultySetting = new Dictionary<int, Dictionary<string, int>>{
@@ -38,18 +40,6 @@ public class GameSaver
                         { "smallStoneAttack", 2},
                         { "middleStoneAttack", 2},
                         { "bigStoneAttack", 2}
-                    } },
-            {2, new Dictionary<string, int>{
-                        { "batAttack", 3},
-                        { "skeletonAttck", 3},
-                        { "fireWarmAttack", 3},
-                        { "puzzleAttack", 3},
-                        { "nightmare1Attack", 3},
-                        { "nightmare2Attack", 3},
-                        { "nightmare2Sweep", 3},
-                        { "smallStoneAttack", 3},
-                        { "middleStoneAttack", 3},
-                        { "bigStoneAttack", 3}
                     } }
     };
 

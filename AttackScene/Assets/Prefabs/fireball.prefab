@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7345818070662377383}
   - component: {fileID: 2932346773870287901}
   - component: {fileID: 3450108230282574251}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: fireball
   m_TagString: FireballAttack
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.16050434, y: -0.028998554}

@@ -58,6 +58,7 @@ public class Shadow : MonoBehaviour
             transform.localScale = new Vector3(1f,transform.localScale.y,transform.localScale.z);
             target = new Vector3(target.x,target.y - 3f,target.z);
         }
+
     }
 
     public bool getExist(){

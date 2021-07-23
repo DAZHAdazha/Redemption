@@ -14,7 +14,7 @@ public class PuzzleArea : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player") && collision.GetType().ToString() == "UnityEngine.PolygonCollider2D")
         {
-            Invoke("setPuzzleTrue", 0.5f);
+            Invoke("setPuzzleTrue", 0.3f);
         }
     }
 

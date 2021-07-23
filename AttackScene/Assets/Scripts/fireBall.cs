@@ -80,21 +80,25 @@ public class fireBall : MonoBehaviour
         transform.right = fireballVelo;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
             rb.velocity = new Vector2(0, 0);
             touchedPlayer = true;
             ani.SetTrigger("explode");
         }
-        else if(collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        else if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
         {
             rb.velocity = new Vector2(0, 0);
             touchedPlayer = true;
             ani.SetTrigger("explode");
-            Vector2 collisionPosition = gameObject.transform.position;
-            GameObject Fire = (GameObject)Instantiate(Groundfire, collisionPosition, Quaternion.identity);
+            if (collision.contacts[0].normal.y > 0)
+            {
+                //Debug.Log("touchedGround");
+                Vector2 collisionPosition = gameObject.transform.position;
+                GameObject Fire = (GameObject)Instantiate(Groundfire, collisionPosition, Quaternion.identity);
+            }
 
         }
     }

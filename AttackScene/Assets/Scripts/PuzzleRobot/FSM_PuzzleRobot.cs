@@ -14,14 +14,8 @@ public class myParameter
     //puzzleAttack的攻击去puzzleAttck脚本里面调整
     public int health;
     public float moveSpeed;
-    //public float chaseSpeed;
     public float idleTime;
-    //public Transform[] patrolPoints;
-    //public Transform[] chasePoints;
     public Transform target;
-    //public LayerMask targetLayer;
-    //public Transform attackPoint;
-    //public float attackArea;
     public Animator animator;
     public Collider2D collider;
     public Rigidbody2D rigidbody;
@@ -35,6 +29,7 @@ public class myParameter
     public GameObject puzzleAttack;
     public Transform worldBoundaryLeft, worldBoundaryRight;
     public GameObject healthSystem;
+    public AudioSource audioSource;
 }
 public class FSM_PuzzleRobot : MonoBehaviour
 {
@@ -50,6 +45,7 @@ public class FSM_PuzzleRobot : MonoBehaviour
         parameter.rigidbody = transform.GetComponent<Rigidbody2D>();
         parameter.collider = transform.GetComponent<Collider2D>();
         parameter.healthSystem = transform.GetComponent<PuzzleRobot>().health;
+        parameter.audioSource = transform.GetComponent<AudioSource>();
         states.Add(myStateType.Idle, new myIdleState(this));
         states.Add(myStateType.Patrol, new myPatrolState(this));
         states.Add(myStateType.Dash, new myDashState(this));

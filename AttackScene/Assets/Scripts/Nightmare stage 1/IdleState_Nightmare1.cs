@@ -157,7 +157,7 @@ public class AppearStateNightmare1 : IState
     public void OnEnter()
     {
         parameter.animator.Play("appear");
-        manager.transform.position = parameter.target.position;//Ë²ÒÆ
+        manager.transform.position = new Vector2( parameter.target.position.x, parameter.target.position.y+2.5f);//Ë²ÒÆ
     }
 
     public void OnUpdate()

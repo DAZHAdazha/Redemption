@@ -1,2 +1,6 @@
 A
-Trap Platform can be used for only ONE time! 
+小心这里的破碎平台！
+B
+不要在这些平台上停留
+A
+破碎后一段时间后它们会重新出现

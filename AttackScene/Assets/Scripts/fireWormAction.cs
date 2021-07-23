@@ -147,6 +147,8 @@ public class fireWormAction : MonoBehaviour
         hurt.Play();
         ani.SetBool("Hited", true);
         currentHealth-= damage;
+        if (currentHealth < 0)
+            currentHealth = 0;
 
         GameObject gb = Instantiate(floatPoint, new Vector2(transform.position.x - 0.5f, transform.position.y + 1f), Quaternion.identity);
         gb.transform.GetChild(0).GetComponent<TextMesh>().text = damage.ToString();

@@ -6,6 +6,7 @@ public class TreasureBox : MonoBehaviour
 {
     public GameObject coin;//掉落物品
     public float delayTime = 0.5f;//物品掉落延迟时间
+    public int coinMax = 3;
     private bool ableToOpen;
     private bool isOpen;
     private Animator anim;
@@ -57,7 +58,12 @@ public class TreasureBox : MonoBehaviour
     }
 
     void getCoin(){
-        Instantiate(coin,transform.position,Quaternion.identity);
+        int coinNum = Random.Range(0, coinMax + 1);
+        for(int i = 0; i < coinNum; i++)
+        {
+            Instantiate(coin, new Vector2(transform.position.x + i-coinNum/2, transform.position.y) , Quaternion.identity);
+        }
+        
     }
     
 }

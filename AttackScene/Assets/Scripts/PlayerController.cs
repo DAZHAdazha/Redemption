@@ -177,6 +177,9 @@ public class PlayerController : MonoBehaviour
                 isAttack = false;
                 isDuck = true;
                 animator.SetBool("Duck",true);
+
+                Invoke("ResolveDuck", 0.35f);//duck动画为0.25
+
                 rigidbody.velocity = new Vector2((transform.localScale.x>0?1:-1) * duckSpeed, 0);
                 //rigidbody.isKinematic = true;
                 if(!isGround){
@@ -364,6 +367,7 @@ public class PlayerController : MonoBehaviour
 
             if (type == 0)//骷髅怪
             {
+                HitSound.soundManagerInstance.skeletontAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<Enemy>().GetHit(Vector2.right, damage, isCritical);
                 else 
@@ -371,6 +375,7 @@ public class PlayerController : MonoBehaviour
             }
             else if(type == 1)//puzzle robot
             {
+                HitSound.soundManagerInstance.puzzlebotAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<PuzzleRobot>().GetHit(Vector2.right, damage, isCritical);
                 else
@@ -378,6 +383,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 2)
             {
+                HitSound.soundManagerInstance.batHitAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<Bat>().GetHit(Vector2.right, damage, isCritical);
                 else
@@ -385,6 +391,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 3)
             {
+                HitSound.soundManagerInstance.firewarmAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<fireWormAction>().gotHit(Vector2.right, damage, isCritical);
                 else
@@ -392,6 +399,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 4)
             {
+                HitSound.soundManagerInstance.nightmare1HitAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<NightMare1>().GetHit(Vector2.right, damage, isCritical);
                 else
@@ -399,6 +407,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 5)
             {
+                HitSound.soundManagerInstance.nightmare2HitAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<NightMare2>().GetHit(Vector2.right, damage, isCritical);
                 else
@@ -406,6 +415,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 6)
             {
+                HitSound.soundManagerInstance.smallStoneMonsterAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<SmallStoneMonster>().GetHit(Vector2.right, damage, isCritical);
                 else
@@ -413,6 +423,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 7)
             {
+                HitSound.soundManagerInstance.middleStoneMonsterAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<MiddleStoneMonster>().GetHit(Vector2.right, damage, isCritical);
                 else
@@ -420,6 +431,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (type == 8)
             {
+                HitSound.soundManagerInstance.bigStoneMonsterHitAudio();
                 if (transform.localScale.x > 0)
                     other.GetComponent<BigStoneMonster>().GetHit(Vector2.right, damage, isCritical);
                 else

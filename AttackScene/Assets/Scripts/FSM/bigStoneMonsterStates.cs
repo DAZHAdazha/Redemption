@@ -38,7 +38,6 @@ public class BigidleState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(BigstateType.chase);
-            return;
         }
         if (timer > p.idleTime)
         {
@@ -100,7 +99,6 @@ public class BigpatrolState : IState
             p.target.position.x <= p.rightChasePosition)
         {
             manager.transitionState(BigstateType.chase);
-            return;
         }
 
         manager.transform.position = Vector2.MoveTowards(manager.transform.position,
@@ -148,10 +146,9 @@ public class BigchaseState : IState
             manager.transform.position.x > p.rightChasePosition)
         {
             manager.transitionState(BigstateType.idle);
-            return;
         }
-
-        manager.flipTo(p.target.position.x);
+        if(p.target)
+            manager.flipTo(p.target.position.x);
 
         if (p.target)
         {
@@ -237,9 +234,8 @@ public class BigattackState : IState//¹¥»÷×´Ì¬
         if(p.target == null)
         {
             manager.transitionState(BigstateType.chase);
-            return;
         }
-        if (Mathf.Abs(manager.transform.position.x - p.target.position.x) < 5) 
+        if (Mathf.Abs(manager.transform.position.x - p.target.position.x) <3f) 
         {
             manager.flipTo(p.target.position.x);
             p.ani.Play("bigAttack1");
