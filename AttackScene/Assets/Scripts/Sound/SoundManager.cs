@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource audioSource;
     
     [SerializeField]
-    private AudioClip pickCoin, openBox, hidenSpike;
+    private AudioClip pickCoin, openBox, hidenSpike,portal;
 
     private void Awake() {
         soundManagerInstance = this;
@@ -30,6 +30,12 @@ public class SoundManager : MonoBehaviour
     public void hidenSpikeAudio()
     {
         audioSource.clip = hidenSpike;
+        audioSource.Play();
+    }
+
+    public void portalAudio()
+    {
+        audioSource.clip = portal;
         audioSource.Play();
     }
 }

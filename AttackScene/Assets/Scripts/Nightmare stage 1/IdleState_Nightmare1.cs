@@ -199,6 +199,7 @@ public class AttackStateNightmare1 : IState
     }
     public void OnEnter()
     {
+        //Nightmare1Sound.soundManagerInstance.Nightmare1AttackAudioPlay();
         parameter.animator.Play("Attack");
         if (parameter.health <= parameter.dangerHealth)
         {

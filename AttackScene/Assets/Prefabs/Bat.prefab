@@ -119,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9102f84e77ce886429e9324c2646997b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bathealth: 4
+  bathealth: 3
   batdamage: 1
   flashtime: 0.2
   speed: 1.5

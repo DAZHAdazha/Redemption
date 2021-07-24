@@ -12,11 +12,28 @@ public class PlayerSound : MonoBehaviour
 
 
     [SerializeField]
-    private AudioClip batHit, puzzlebotHit, skeletonHit, firewarmHit, smallStoneMonsterHit, middleStoneMonsterHit, bigStoneMonsterHit,
-        nightmare1Hit, nightmare2Hit;
+    private AudioClip hurtAudio,showUpAudio;
 
     private void Awake()
     {
         soundManagerInstance = this;
     }
+
+
+
+    public void hurtAudioPlay()
+    {
+        if (!audioSource.isPlaying)
+        {
+            audioSource.clip = hurtAudio;
+            audioSource.Play();
+        }
+    }
+
+    public void showUpPlay()
+    {
+       audioSource.clip = showUpAudio;
+       audioSource.Play();
+    }
+
 }

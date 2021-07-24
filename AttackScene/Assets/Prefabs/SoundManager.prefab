@@ -48,6 +48,7 @@ MonoBehaviour:
   pickCoin: {fileID: 8300000, guid: 391908b58e627914ea577a13304a5189, type: 3}
   openBox: {fileID: 8300000, guid: c4a39db2f4dcd2f40b7168cc1676e1c2, type: 3}
   hidenSpike: {fileID: 8300000, guid: 14d8d00970ed22f4082e68817bd4272a, type: 3}
+  portal: {fileID: 8300000, guid: 97b9c44f290a72440986c74a94d6562d, type: 3}
 --- !u!82 &5729803731071527530
 AudioSource:
   m_ObjectHideFlags: 0
@@ -60,7 +61,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.3
   m_Pitch: 1
   Loop: 0
   Mute: 0

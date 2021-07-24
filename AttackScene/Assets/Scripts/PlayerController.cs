@@ -564,6 +564,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void getHit() {
+        //PlayerSound.soundManagerInstance.hurtAudioPlay();
         isHurt = true;
         rigidbody.constraints = RigidbodyConstraints2D.FreezeAll;
         animator.SetBool("Hurt", true);
@@ -579,7 +580,8 @@ public class PlayerController : MonoBehaviour
         isHurt = false;
         animator.SetBool("Hurt", false);
         if (!animator.GetBool("isGround")){
-            transform.localPosition = new Vector2(transform.localPosition.x,transform.localPosition.y + 0.001f);
+            //transform.localPosition = new Vector2(transform.localPosition.x,transform.localPosition.y + 0.001f);
+            transform.localPosition = new Vector2(transform.localPosition.x,transform.localPosition.y);
         }
         
     }
@@ -613,6 +615,7 @@ public class PlayerController : MonoBehaviour
     }
 
     public void getDamage(float damage = 1f){
+        PlayerSound.soundManagerInstance.hurtAudioPlay();
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
         if (!myShadow.getExist())
         {

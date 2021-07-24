@@ -50,6 +50,7 @@ public class DoorEnter : MonoBehaviour
     void enterDoor(){
         if(isDoor && !playerController.myShadow.getExist())
         {
+            SoundManager.soundManagerInstance.portalAudio();
             anim.SetTrigger("Suck");
             playerTransform.gameObject.SetActive(false);
         }

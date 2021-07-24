@@ -3,28 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleRobotSound : MonoBehaviour
+public class Nightmare2Sound : MonoBehaviour
 {
     //单例模式
     //生成静态类避免多次实例化浪费资源
-    public static PuzzleRobotSound soundManagerInstance;
+    public static Nightmare2Sound soundManagerInstance;
     public AudioSource audioSource;
 
 
     [SerializeField]
-    private AudioClip puzzleRobotAttack;
+    private AudioClip Nightmare2Attack;
 
     private void Awake()
     {
         soundManagerInstance = this;
-    }
+    } 
 
 
 
-    public void puzzleRobotAttackAudioPlay()
+    public void Nightmare2AttackAudioPlay()
     {
-       audioSource.clip = puzzleRobotAttack;
+        audioSource.clip = Nightmare2Attack;
         audioSource.Play();
     }
+
+
+
+
 
 }

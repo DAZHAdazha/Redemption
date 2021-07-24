@@ -227,6 +227,7 @@ public class myAttackState : IState
     }
     public void OnEnter()
     {
+        PuzzleRobotSound.soundManagerInstance.puzzleRobotAttackAudioPlay();
         parameter.animator.Play("Shoot");
         manager.generatePuzzleAttack(-manager.transform.localScale.x);
     }
