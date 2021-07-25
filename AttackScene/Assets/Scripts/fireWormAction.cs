@@ -55,6 +55,9 @@ public class fireWormAction : MonoBehaviour
     public GameObject floatPoint;
     public GameObject coin;//µÙ¬‰ŒÔ∆∑
     public int coinMax = 2;
+
+    public GameObject nextLevel;
+    public GameObject mail;
     void Start()
     {
         facingLeft = false;
@@ -171,6 +174,8 @@ public class fireWormAction : MonoBehaviour
 
     public void destoryEnemy()
     {
+        mail.SetActive(true);
+        nextLevel.SetActive(true);
         Destroy(health.transform.parent.gameObject);
         getCoin();
         Destroy(gameObject);

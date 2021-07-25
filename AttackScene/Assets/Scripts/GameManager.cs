@@ -35,37 +35,52 @@ public class GameManager : MonoBehaviour
     }
     public void GameStart()
     {
-        //SceneManager.LoadScene(1
+        //SceneManager.LoadScene(1);
         canvas.GetComponent<MainMenu>().LoadLevel(1);
         Save();
     }
     public void LevelFear()
     {
         //SceneManager.LoadScene(2);
+        if (GameSaver.unLockLevel < 1)
+            GameSaver.unLockLevel = 1;
+        GameSaver.attackLock = true;
+        GameSaver.duckLock = true;
+        GameSaver.defenseLock = true;
         canvas.GetComponent<MainMenu>().LoadLevel(2);
         Save();
     }
     public void LevelAngry()
     {
         //SceneManager.LoadScene(3);
+        if (GameSaver.unLockLevel < 2)
+            GameSaver.unLockLevel = 2;
+        GameSaver.shadowLock = true;
         canvas.GetComponent<MainMenu>().LoadLevel(3);
         Save();
     }
     public void LevelPuzzle()
     {
         //SceneManager.LoadScene(4);
+        if (GameSaver.unLockLevel < 3)
+            GameSaver.unLockLevel = 3;
+        GameSaver.bonusLock = true;
         canvas.GetComponent<MainMenu>().LoadLevel(4);
         Save();
     }
     public void LevelSorrow()
     {
         //SceneManager.LoadScene(5);
+        if (GameSaver.unLockLevel < 4)
+            GameSaver.unLockLevel = 4;
         canvas.GetComponent<MainMenu>().LoadLevel(5);
         Save();
     }
     public void LevelNightmare()
     {
         //SceneManager.LoadScene(6);
+        if (GameSaver.unLockLevel < 5)
+            GameSaver.unLockLevel = 5;
         canvas.GetComponent<MainMenu>().LoadLevel(6);
         Save();
     }
@@ -141,14 +156,29 @@ public class GameManager : MonoBehaviour
 
     public void godMode()
     {
+        GameSaver.healthMax = 1000;
+        GameSaver.manaMax = 1000;
+    }
+
+    public void unlockAll()
+    {
         setAttack();
         setBonus();
         setDefense();
         setDuck();
         setShadow();
-        GameSaver.healthMax = 1000;
-        GameSaver.manaMax = 1000;
         GameSaver.unLockLevel = 5;
+    }
+
+
+    public void pause()
+    {
+        Time.timeScale = 0f;
+    }
+
+    public void resume()
+    {
+        Time.timeScale = 1f;
     }
 
 }

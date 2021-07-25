@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public GameObject floatPoint;
     public GameObject coin;//掉落物品
     public int coinMax = 2;
+    public GameObject nextLevel;
+    public GameObject mail;
 
     private Vector2 direction;
     private bool isHit;
@@ -64,6 +66,8 @@ public class Enemy : MonoBehaviour
     }
 
     public void destory(){
+        mail.SetActive(true);
+        nextLevel.SetActive(true);
         Destroy(health.transform.parent.gameObject);
         getCoin();
         Destroy(gameObject);

@@ -9,6 +9,8 @@ public class BigStoneMonster : MonoBehaviour
     public GameObject floatPoint;
     public GameObject coin;
     public int coinMax = 4;
+    public GameObject nextLevel;
+    //public GameObject mail;
 
     private Vector2 direction;
     private bool isHit;
@@ -67,6 +69,8 @@ public class BigStoneMonster : MonoBehaviour
 
     public void destory()
     {
+        //mail.SetActive(true);
+        nextLevel.SetActive(true);
         Destroy(health.transform.parent.gameObject);
         getCoin();//一定要写成函数 否则父物体消失后 无法拾取金币
         Destroy(gameObject);

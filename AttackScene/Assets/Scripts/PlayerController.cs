@@ -73,8 +73,7 @@ public class PlayerController : MonoBehaviour
     private PolygonCollider2D polygonCollider2D;
     private Renderer myRender;
     private HealthSystem myHealSystem;
-
-
+    private GameObject skills;
 
 
     private void Awake() {
@@ -137,10 +136,14 @@ public class PlayerController : MonoBehaviour
         myRender = GetComponent<Renderer>();
         myShadow = shadow.GetComponent<Shadow>();
         Shadow.isExist = false;
-
+        skills = GameObject.Find("Skills");
+        for (int i = 0; i < GameSaver.unLockLevel; i++)
+        {
+            skills.transform.GetChild(i).gameObject.SetActive(true);
+        }
     }
 
-    void Update()
+    void Update()                                                                                                                                                                                                                                                                                                                                                           
     {
         updateFunction();
     }

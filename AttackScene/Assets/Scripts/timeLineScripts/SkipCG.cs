@@ -16,14 +16,15 @@ public class SkipCG : BasicPlayableBehaviour
         controls.GamePlay.EnterDoor.started += ctx => skipCG();
     }
 
-    public virtual void ProcessFrame(Playable playable, FrameData info, object playerData)
-    {
-    }
+    //public virtual void ProcessFrame(Playable playable, FrameData info, object playerData)
+    //{
 
-    public virtual void OnPlayStateChanged(FrameData info, PlayState newState)
-    {
+    //}
+
+    //public virtual void OnPlayStateChanged(FrameData info, PlayState newState)
+    //{
         
-    }
+    //}
 
     void OnEnable()
     {
@@ -37,7 +38,12 @@ public class SkipCG : BasicPlayableBehaviour
 
     private void skipCG()
     {
-        SceneManager.LoadScene(0);
+        if(SceneManager.GetActiveScene().name=="FinalCG")
+            SceneManager.LoadScene(0);
+        else
+        {
+            SceneManager.LoadScene(6);
+        }
     }
 
 
