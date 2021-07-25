@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
 {
     static GameManager instance;
     private PlayerController playerController;
+    private GameObject canvas;
     private void Awake()
     {
         if(instance != null)
@@ -19,44 +20,53 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        canvas = GameObject.Find("Canvas");
         if(GameObject.Find("Player"))
             playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+        
     }
 
     // Update is called once per frame
      public void Menu()
     {
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
+        canvas.GetComponent<MainMenu>().LoadLevel(0);
         Save();
     }
     public void GameStart()
     {
-        SceneManager.LoadScene(1);
+        //SceneManager.LoadScene(1
+        canvas.GetComponent<MainMenu>().LoadLevel(1);
         Save();
     }
     public void LevelFear()
     {
-        SceneManager.LoadScene(2);
+        //SceneManager.LoadScene(2);
+        canvas.GetComponent<MainMenu>().LoadLevel(2);
         Save();
     }
     public void LevelAngry()
     {
-        SceneManager.LoadScene(3);
+        //SceneManager.LoadScene(3);
+        canvas.GetComponent<MainMenu>().LoadLevel(3);
         Save();
     }
     public void LevelPuzzle()
     {
-        SceneManager.LoadScene(4);
+        //SceneManager.LoadScene(4);
+        canvas.GetComponent<MainMenu>().LoadLevel(4);
         Save();
     }
     public void LevelSorrow()
     {
-        SceneManager.LoadScene(5);
+        //SceneManager.LoadScene(5);
+        canvas.GetComponent<MainMenu>().LoadLevel(5);
         Save();
     }
     public void LevelNightmare()
     {
-        SceneManager.LoadScene(6);
+        //SceneManager.LoadScene(6);
+        canvas.GetComponent<MainMenu>().LoadLevel(6);
         Save();
     }
     public void Exit()
@@ -138,6 +148,7 @@ public class GameManager : MonoBehaviour
         setShadow();
         GameSaver.healthMax = 1000;
         GameSaver.manaMax = 1000;
+        GameSaver.unLockLevel = 5;
     }
 
 }

@@ -7,6 +7,8 @@ public class BigStoneMonster : MonoBehaviour
     public float hitSpeed;
     public GameObject health;
     public GameObject floatPoint;
+    public GameObject coin;
+    public int coinMax = 4;
 
     private Vector2 direction;
     private bool isHit;
@@ -66,7 +68,17 @@ public class BigStoneMonster : MonoBehaviour
     public void destory()
     {
         Destroy(health.transform.parent.gameObject);
+        getCoin();//一定要写成函数 否则父物体消失后 无法拾取金币
         Destroy(gameObject);
+    }
+
+    void getCoin()
+    {
+        int coinNum = Random.Range(2, coinMax + 1);
+        for (int i = 0; i < coinNum; i++)
+        {
+            Instantiate(coin, new Vector2(transform.position.x + i - coinNum / 2, transform.position.y + 1), Quaternion.identity);
+        }
     }
 
 }

@@ -12,7 +12,7 @@ public class PlayerSound : MonoBehaviour
 
 
     [SerializeField]
-    private AudioClip hurtAudio,showUpAudio;
+    private AudioClip hurtAudio;
 
     private void Awake()
     {
@@ -30,10 +30,5 @@ public class PlayerSound : MonoBehaviour
         }
     }
 
-    public void showUpPlay()
-    {
-       audioSource.clip = showUpAudio;
-       audioSource.Play();
-    }
 
 }

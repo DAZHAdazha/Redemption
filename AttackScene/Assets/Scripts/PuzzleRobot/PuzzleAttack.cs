@@ -10,8 +10,14 @@ public class PuzzleAttack : MonoBehaviour
     public float attackPoint;
 
     private Rigidbody2D rigidbody2d;
-    
+
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        attackPoint = GameSaver.difficultySetting[GameSaver.difficulty]["puzzleAttack"];
+    }
+
     void Start()
     {
         rigidbody2d = gameObject.GetComponent<Rigidbody2D>();

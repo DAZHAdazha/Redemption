@@ -78,9 +78,29 @@ public class PlayerController : MonoBehaviour
 
 
     private void Awake() {
+        Time.timeScale = 1;
         //加载存档，需要在awake中
         health = GameSaver.healthMax;
         mana = GameSaver.manaMax;
+        if (GameSaver.smallHealth)
+        {
+            health += 5;
+        }
+        if (GameSaver.bigHealth)
+        {
+            health += 10;
+        }
+
+        if (GameSaver.smallMana)
+        {
+            mana += 5;
+        }
+        if (GameSaver.bigMana)
+        {
+            mana += 10;
+        }
+
+        
         attackLock = GameSaver.attackLock;
         duckLock = GameSaver.duckLock;
         shadowLock = GameSaver.shadowLock;

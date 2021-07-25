@@ -78,6 +78,12 @@ public class middleStoneMonsterFSM : MonoBehaviour
         currentState.OnUpdate();
     }
 
+    private void Awake()
+    {
+        p.health = GameSaver.difficultySetting[GameSaver.difficulty]["middleStoneHealth"];
+        p.attackValue = GameSaver.difficultySetting[GameSaver.difficulty]["middleStoneAttack"];
+    }
+
     public void transitionState(MiddlestateType s)
     {
         if (currentState != null)

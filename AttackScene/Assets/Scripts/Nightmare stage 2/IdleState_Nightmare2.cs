@@ -243,6 +243,7 @@ public class HitStateNightmare2 : IState
     private nightmareParameter2 parameter;
 
     private AnimatorStateInfo info;
+    private float timer = 0f;
     public HitStateNightmare2(FSM_Nightmare2 manager)
     {
         this.manager = manager;
@@ -255,6 +256,8 @@ public class HitStateNightmare2 : IState
 
     public void OnUpdate()
     {
+        timer += Time.deltaTime;
+
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
 
         if (parameter.health <= 0)
@@ -266,8 +269,9 @@ public class HitStateNightmare2 : IState
         {
             if ( parameter.health <= parameter.dangerHealth)//注意此处要用else否则 transitionState会被覆盖
             {
-                if (info.normalizedTime >= .95f)
+                if (info.normalizedTime >= .95f && timer>parameter.sweepCoolDown)
                 {
+                    timer = 0;
                     manager.TransitionState(nightmareStateType2.Sweep);
                     return;
                 }

@@ -60,6 +60,13 @@ public class FSM_Nightmare1 : MonoBehaviour
 
     }
 
+
+    private void Awake()
+    {
+        parameter.health = GameSaver.difficultySetting[GameSaver.difficulty]["nightmare1Health"];
+        parameter.attackPoint = GameSaver.difficultySetting[GameSaver.difficulty]["nightmare1Attack"];
+    }
+
     void Update()
     {
         currentState.OnUpdate();

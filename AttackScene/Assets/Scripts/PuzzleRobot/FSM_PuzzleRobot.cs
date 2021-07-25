@@ -65,6 +65,12 @@ public class FSM_PuzzleRobot : MonoBehaviour
 
     }
 
+
+    private void Awake()
+    {
+        parameter.health = GameSaver.difficultySetting[GameSaver.difficulty]["puzzleHealth"];
+    }
+
     public void TransitionState(myStateType type)
     {
         if (currentState != null)

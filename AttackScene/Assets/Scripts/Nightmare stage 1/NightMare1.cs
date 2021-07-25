@@ -19,7 +19,7 @@ public class NightMare1 : MonoBehaviour
     private FSM_Nightmare1 fsm;
     private bool dangerMark = false;
     new private Rigidbody2D rigidbody;
-    // Start is called before the first frame update
+
     void Start()
     {
         animator = gameObject.GetComponent<Animator>();

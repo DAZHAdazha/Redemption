@@ -67,6 +67,13 @@ public class FSM_Nightmare2 : MonoBehaviour
 
     }
 
+    private void Awake()
+    {
+        parameter.health = GameSaver.difficultySetting[GameSaver.difficulty]["nightmare2Health"];
+        parameter.attackPoint = GameSaver.difficultySetting[GameSaver.difficulty]["nightmare2Attack"];
+        parameter.sweepPoint = GameSaver.difficultySetting[GameSaver.difficulty]["nightmare2Sweep"];
+    }
+
     void Update()
     {
         currentState.OnUpdate();

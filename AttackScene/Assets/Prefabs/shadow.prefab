@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.07, y: -2.67, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 9129699388974469919}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: 9a4a9bafa16a4674ba2a346f464b1f92, type: 3}
-  m_Color: {r: 0.1792453, g: 0.044811323, b: 0.044811323, a: 1}
+  m_Color: {r: 0.13207549, g: 0.03800285, b: 0.03800285, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -138,7 +139,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.95, y: 0.32}
+    oldSize: {x: 1.9, y: 0.64}
     newSize: {x: 0.85333335, y: 0.18666667}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -166,3 +167,73 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &6236698162364153926
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 7917668798275462683}
+    m_Modifications:
+    - target: {fileID: 2899762728193266502, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_Name
+      value: Point Light 2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266520, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_Intensity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266520, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_PointLightInnerRadius
+      value: 0.42
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+--- !u!4 &9129699388974469919 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2899762728193266521, guid: afc8ac60b56a59c4e98c7ce129ec7918, type: 3}
+  m_PrefabInstance: {fileID: 6236698162364153926}
+  m_PrefabAsset: {fileID: 0}

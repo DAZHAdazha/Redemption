@@ -8,6 +8,8 @@ public class NightMare2 : MonoBehaviour
     public GameObject floatPoint;
     public GameObject health;
     public float hitSpeed;
+    public GameObject coin;
+    public int coinMax = 5;
 
     private Vector2 direction;
     new private Rigidbody2D rigidbody;
@@ -62,7 +64,7 @@ public class NightMare2 : MonoBehaviour
         {
                 r = 0;
                 g = 255;
-                b = 0; 
+            b = 0;
         }
 
         gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(r,g, b, 255);
@@ -94,8 +96,17 @@ public class NightMare2 : MonoBehaviour
     public void destory()
     {
         Destroy(health.transform.parent.gameObject);
+        getCoin();
         Destroy(gameObject);
     }
 
+    void getCoin()
+    {
+        int coinNum = Random.Range(3, coinMax + 1);
+        for (int i = 0; i < coinNum; i++)
+        {
+            Instantiate(coin, new Vector2(transform.position.x + i - coinNum / 2, transform.position.y + 1), Quaternion.identity);
+        }
+    }
 
 }

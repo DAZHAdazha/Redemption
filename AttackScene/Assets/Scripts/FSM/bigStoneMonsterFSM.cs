@@ -69,6 +69,13 @@ public class bigStoneMonsterFSM : MonoBehaviour
         currentState = new BigidleState(this);
     }
 
+
+    private void Awake()
+    {
+        p.health = GameSaver.difficultySetting[GameSaver.difficulty]["bigStoneHealth"];
+        p.attackValue = GameSaver.difficultySetting[GameSaver.difficulty]["bigStoneAttack"];
+    }
+
     // Update is called once per frame
     void Update()
     {

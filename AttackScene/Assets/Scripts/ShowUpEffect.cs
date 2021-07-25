@@ -25,7 +25,6 @@ public class ShowUpEffect : MonoBehaviour
 
     public void destroyEffect()
     {
-        
         playerTransform.gameObject.SetActive(true);
         playerController.move = move;
         Destroy(gameObject);

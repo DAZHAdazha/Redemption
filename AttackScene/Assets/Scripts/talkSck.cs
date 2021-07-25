@@ -108,7 +108,7 @@ public class talkSck : MonoBehaviour
                         index++;
                         break;
                 }
-                Debug.Log(textList[index]);   
+                //Debug.Log(textList[index]);   
                 textLabel.text = textList[index++];
                 return;
                

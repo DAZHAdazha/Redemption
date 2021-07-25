@@ -83,6 +83,12 @@ public class smallStoneMonsterFSM : MonoBehaviour
         currentState.OnEnter();
     }
 
+    private void Awake()
+    {
+        p.health = GameSaver.difficultySetting[GameSaver.difficulty]["smallStoneHealth"];
+        p.attackValue = GameSaver.difficultySetting[GameSaver.difficulty]["smallStoneAttack"];
+    }
+
     public void flipTo(float x)
     {
         if(transform.position.x > x)

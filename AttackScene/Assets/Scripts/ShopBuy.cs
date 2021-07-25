@@ -23,13 +23,14 @@ public class ShopBuy : MonoBehaviour
         //buttonObj.GetComponent<Button>().onClick.AddListener(buy);
     }
 
-
+    private void Start()
+    {
+        deposittext.GetComponent<Text>().text = GameSaver.coinNum.ToString();
+    }
 
 
     public void buy()
     {
-
-        Debug.Log(gameObject.transform.parent.parent.name);
 
         if(GameSaver.coinNum < price){
             insufficient.SetActive(true);
@@ -42,7 +43,23 @@ public class ShopBuy : MonoBehaviour
              int remain = GameSaver.coinNum - price;
              GameSaver.coinNum = remain;
              deposittext.GetComponent<Text>().text=remain.ToString();
-            
+             switch (gameObject.transform.parent.parent.name)
+                {
+                    case "redsmall":
+                        GameSaver.smallHealth = true;
+                        break;
+                    case "redbig":
+                        GameSaver.bigHealth = true;
+                        break;
+                    case "bluesmall":
+                        GameSaver.smallMana = true;
+                        break;
+                    case "bluebig":
+                        GameSaver.bigMana = true;
+                        break;
+                }
+            gameObject.transform.parent.parent.gameObject.SetActive(false);
+
         }  
     }
 

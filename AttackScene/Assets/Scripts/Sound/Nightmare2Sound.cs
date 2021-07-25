@@ -12,7 +12,7 @@ public class Nightmare2Sound : MonoBehaviour
 
 
     [SerializeField]
-    private AudioClip Nightmare2Attack;
+    private AudioClip Nightmare2Attack, Nightmare2Sweep, Nightmare2Defense;
 
     private void Awake()
     {
@@ -24,6 +24,18 @@ public class Nightmare2Sound : MonoBehaviour
     public void Nightmare2AttackAudioPlay()
     {
         audioSource.clip = Nightmare2Attack;
+        audioSource.Play();
+    }
+
+    public void Nightmare2SweepAudioPlay()
+    {
+        audioSource.clip = Nightmare2Sweep;
+        audioSource.Play();
+    }
+
+    public void Nightmare2DefenseAudioPlay()
+    {
+        audioSource.clip = Nightmare2Defense;
         audioSource.Play();
     }
 

@@ -25,8 +25,8 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator AsyncLoadLevel(int sceneIndex){
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneIndex);
-        gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
-        gameObject.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        //gameObject.SetActive(false);
+
         loadingScreen.SetActive(true);
         while(!operation.isDone){
             float progress = operation.progress / 0.9f;// operation.progress的值为0-0.9之间 所以除0.9

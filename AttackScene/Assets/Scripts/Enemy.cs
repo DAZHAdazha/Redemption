@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public GameObject health;
     public GameObject floatPoint;
     public GameObject coin;//掉落物品
+    public int coinMax = 2;
 
     private Vector2 direction;
     private bool isHit;
@@ -77,7 +78,11 @@ public class Enemy : MonoBehaviour
     }
 
     void getCoin(){
-        Instantiate(coin,new Vector2(transform.position.x,transform.position.y + 1f) ,Quaternion.identity);
+        int coinNum = Random.Range(1, coinMax + 1);
+        for (int i = 0; i < coinNum; i++)
+        {
+            Instantiate(coin, new Vector2(transform.position.x + i - coinNum / 2, transform.position.y+1), Quaternion.identity);
+        }
     }
     
 }

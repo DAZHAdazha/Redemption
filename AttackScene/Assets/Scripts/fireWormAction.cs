@@ -54,6 +54,7 @@ public class fireWormAction : MonoBehaviour
     public GameObject health;
     public GameObject floatPoint;
     public GameObject coin;//µÙ¬‰ŒÔ∆∑
+    public int coinMax = 2;
     void Start()
     {
         facingLeft = false;
@@ -190,7 +191,11 @@ public class fireWormAction : MonoBehaviour
 
     void getCoin()
     {
-        Instantiate(coin, new Vector2(transform.position.x, transform.position.y + 1f), Quaternion.identity);
+        int coinNum = Random.Range(1, coinMax + 1);
+        for (int i = 0; i < coinNum; i++)
+        {
+            Instantiate(coin, new Vector2(transform.position.x + i - coinNum / 2, transform.position.y+1), Quaternion.identity);
+        }
     }
 
 
