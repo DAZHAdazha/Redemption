@@ -96,8 +96,11 @@ public class NightMare2 : MonoBehaviour
     public void destory()
     {
         Destroy(health.transform.parent.gameObject);
-        getCoin();
+        //getCoin();
         Destroy(gameObject);
+
+        GameObject.Find("GameManager").GetComponent<GameManager>().FinalCG();
+
     }
 
     void getCoin()

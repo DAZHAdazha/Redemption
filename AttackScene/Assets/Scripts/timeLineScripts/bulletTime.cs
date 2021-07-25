@@ -21,10 +21,7 @@ public class bulletTime : BasicPlayableBehaviour
 
     public virtual void OnPlayStateChanged(FrameData info, PlayState newState)
     {
-        if(newState == PlayState.Playing)
-        {
-            _originalTimeScale = Time.timeScale;
-        }
+        _originalTimeScale = Time.timeScale;
     }
     
 }

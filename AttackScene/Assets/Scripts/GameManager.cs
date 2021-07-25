@@ -47,8 +47,9 @@ public class GameManager : MonoBehaviour
         GameSaver.attackLock = true;
         GameSaver.duckLock = true;
         GameSaver.defenseLock = true;
-        canvas.GetComponent<MainMenu>().LoadLevel(2);
         Save();
+        canvas.GetComponent<MainMenu>().LoadLevel(2);
+        
     }
     public void LevelAngry()
     {
@@ -56,8 +57,9 @@ public class GameManager : MonoBehaviour
         if (GameSaver.unLockLevel < 2)
             GameSaver.unLockLevel = 2;
         GameSaver.shadowLock = true;
-        canvas.GetComponent<MainMenu>().LoadLevel(3);
         Save();
+        canvas.GetComponent<MainMenu>().LoadLevel(3);
+       
     }
     public void LevelPuzzle()
     {
@@ -65,25 +67,38 @@ public class GameManager : MonoBehaviour
         if (GameSaver.unLockLevel < 3)
             GameSaver.unLockLevel = 3;
         GameSaver.bonusLock = true;
-        canvas.GetComponent<MainMenu>().LoadLevel(4);
         Save();
+        canvas.GetComponent<MainMenu>().LoadLevel(4);
+        
     }
     public void LevelSorrow()
     {
         //SceneManager.LoadScene(5);
         if (GameSaver.unLockLevel < 4)
             GameSaver.unLockLevel = 4;
-        canvas.GetComponent<MainMenu>().LoadLevel(5);
         Save();
+        canvas.GetComponent<MainMenu>().LoadLevel(5);
+        
     }
     public void LevelNightmare()
     {
+        //Debug.Log("here");
         //SceneManager.LoadScene(6);
         if (GameSaver.unLockLevel < 5)
             GameSaver.unLockLevel = 5;
-        canvas.GetComponent<MainMenu>().LoadLevel(6);
         Save();
+        canvas.GetComponent<MainMenu>().LoadLevel(6);
+        
     }
+
+    public void FinalCG()
+    {
+        Save();
+        canvas.GetComponent<MainMenu>().LoadLevel(8);
+        
+    }
+
+
     public void Exit()
     {
         Application.Quit();
@@ -95,11 +110,11 @@ public class GameManager : MonoBehaviour
         {
             GameSaver.healthMax = playerController.health;
             GameSaver.manaMax = playerController.mana;
-            GameSaver.attackLock = playerController.attackLock;
-            GameSaver.duckLock = playerController.duckLock;
-            GameSaver.shadowLock = playerController.shadowLock;
-            GameSaver.bonusLock = playerController.bonusLock;
-            GameSaver.defenseLock = playerController.defenseLock;
+            //GameSaver.attackLock = playerController.attackLock;
+            //GameSaver.duckLock = playerController.duckLock;
+            //GameSaver.shadowLock = playerController.shadowLock;
+            //GameSaver.bonusLock = playerController.bonusLock;
+            //GameSaver.defenseLock = playerController.defenseLock;
             GameSaver.coinNum = CoinUI.coinNum;
         }
 
@@ -179,6 +194,16 @@ public class GameManager : MonoBehaviour
     public void resume()
     {
         Time.timeScale = 1f;
+    }
+
+    public void skipCG()
+    {
+        if (SceneManager.GetActiveScene().name == "FinalCG")
+            SceneManager.LoadScene(0);
+        else if (SceneManager.GetActiveScene().name == "bossCG")
+        {
+            SceneManager.LoadScene(7);
+        }
     }
 
 }

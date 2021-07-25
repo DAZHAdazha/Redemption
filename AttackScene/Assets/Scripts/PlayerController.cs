@@ -99,7 +99,6 @@ public class PlayerController : MonoBehaviour
             mana += 10;
         }
 
-        
         attackLock = GameSaver.attackLock;
         duckLock = GameSaver.duckLock;
         shadowLock = GameSaver.shadowLock;

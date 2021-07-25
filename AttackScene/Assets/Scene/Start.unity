@@ -3977,7 +3977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deposittext: {fileID: 1145853252}
   insufficient: {fileID: 170698607}
-  price: 30
+  price: 10
 --- !u!114 &589121740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4386,7 +4386,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 30
+  m_Text: 10
 --- !u!222 &636103180
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8427,7 +8427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deposittext: {fileID: 1145853252}
   insufficient: {fileID: 736349000}
-  price: 50
+  price: 30
 --- !u!114 &1388959016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8593,7 +8593,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50
+  m_Text: 30
 --- !u!222 &1390413838
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12821,7 +12821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 30
+  m_Text: 10
 --- !u!222 &53561291736989804
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13887,7 +13887,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 50
+  m_Text: 30
 --- !u!1 &53561293731383346
 GameObject:
   m_ObjectHideFlags: 0
@@ -13984,7 +13984,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deposittext: {fileID: 1145853252}
   insufficient: {fileID: 3592326843269018749}
-  price: 30
+  price: 10
 --- !u!114 &119069341573639559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13999,7 +13999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deposittext: {fileID: 1145853252}
   insufficient: {fileID: 3592326844080353409}
-  price: 50
+  price: 30
 --- !u!114 &1692655305301374896
 MonoBehaviour:
   m_ObjectHideFlags: 0

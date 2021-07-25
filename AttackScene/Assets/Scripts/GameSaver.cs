@@ -7,11 +7,11 @@ public class GameSaver
     public static float healthMax = 15;
     public static float manaMax = 10;
     public static int coinNum = 0;
-    public static bool attackLock = true;
-    public static bool duckLock = true;
-    public static bool shadowLock = true;
-    public static bool bonusLock = true;
-    public static bool defenseLock = true;
+    public static bool attackLock = false;
+    public static bool duckLock = false;
+    public static bool shadowLock = false;
+    public static bool bonusLock = false;
+    public static bool defenseLock = false;
     public static bool smallHealth = false;
     public static bool bigHealth = false;
     public static bool smallMana = false;
@@ -20,7 +20,7 @@ public class GameSaver
 
 
 
-    public static int difficulty = 1;
+    public static int difficulty = 0;
     public static Dictionary<int, Dictionary<string, int>> difficultySetting = new Dictionary<int, Dictionary<string, int>>{
             {0, new Dictionary<string, int>{
                         { "batAttack", 1},
