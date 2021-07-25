@@ -81,7 +81,7 @@ public class PatrolState : IState
             manager.TransitionState(StateType.React);
             return;
         }
-        if (Vector2.Distance(manager.transform.position, parameter.patrolPoints[patrolPosition].position) < .1f)
+        if (Mathf.Abs(manager.transform.position.x - parameter.patrolPoints[patrolPosition].position.x) < .1f)
         {
             manager.TransitionState(StateType.Idle);
         }
@@ -103,6 +103,8 @@ public class ChaseState : IState
     private FSM manager;
     private Parameter parameter;
 
+    private float chaseTimer;
+
     public ChaseState(FSM manager)
     {
         this.manager = manager;
@@ -110,15 +112,25 @@ public class ChaseState : IState
     }
     public void OnEnter()
     {
+        chaseTimer = 0;
         parameter.animator.Play("Walk");
     }
 
     public void OnUpdate()
     {
         manager.FlipTo(parameter.target);
+        //Debug.Log(chaseTimer);
+        if (chaseTimer > parameter.jumpChaseCD)
+        {
+            //Debug.Log("needJump");
+            jumpToward();
+
+            manager.FlipTo(parameter.target);
+            chaseTimer = 0;
+        }
         if (parameter.target)
             manager.transform.position = Vector2.MoveTowards(manager.transform.position,
-            new Vector2(parameter.target.position.x,manager.transform.position.y), parameter.chaseSpeed * Time.deltaTime);
+            new Vector2(parameter.target.position.x, manager.transform.position.y), parameter.chaseSpeed * Time.deltaTime);
 
         if (parameter.getHit)
         {
@@ -136,11 +148,32 @@ public class ChaseState : IState
         {
             manager.TransitionState(StateType.Attack);
         }
+        chaseTimer += Time.deltaTime;
     }
 
     public void OnExit()
     {
 
+    }
+
+    public void jumpToward()
+    {
+        if (parameter.target)
+        {
+            if (Mathf.Abs(manager.transform.position.x - parameter.target.position.x) > parameter.jumpChaseDistance)
+            {
+                if (manager.transform.position.x > parameter.target.position.x)
+                {
+                    parameter.rigidbody.velocity = new Vector2(-parameter.jumpSpeed, 5);
+
+                }
+                else
+                {
+                    parameter.rigidbody.velocity = new Vector2(parameter.jumpSpeed, 5);
+
+                }
+            }
+        }
     }
 }
 
@@ -186,6 +219,7 @@ public class AttackState : IState
     private FSM manager;
     private Parameter parameter;
 
+
     private AnimatorStateInfo info;
     public AttackState(FSM manager)
     {
@@ -194,12 +228,15 @@ public class AttackState : IState
     }
     public void OnEnter()
     {
+
         parameter.animator.Play("Attack");
     }
 
     public void OnUpdate()
     {
         info = parameter.animator.GetCurrentAnimatorStateInfo(0);
+
+
 
         if (parameter.getHit)
         {
@@ -216,6 +253,7 @@ public class AttackState : IState
     {
 
     }
+
 }
 
 public class HitState : IState

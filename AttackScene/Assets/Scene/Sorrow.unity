@@ -938,6 +938,10 @@ PrefabInstance:
       propertyPath: m_ScreenY
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4197305578552795028, guid: c1d0d976d54effd4eb86d0243bca5dbd, type: 3}
+      propertyPath: m_LookaheadIgnoreY
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4529171630356597157, guid: c1d0d976d54effd4eb86d0243bca5dbd, type: 3}
       propertyPath: m_BoundingShape2D
       value: 
@@ -10351,6 +10355,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5729803731071527530, guid: de023e204be7d9d46bc247e7b677f59b, type: 3}
+      propertyPath: m_Volume
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 5729803731071527533, guid: de023e204be7d9d46bc247e7b677f59b, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -11367,7 +11375,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2419946055386868539, guid: 68e759a52dde6e645b18b8b4e5430336, type: 3}
       propertyPath: m_Text
-      value: "\u662F\u7684\n(\u6309E\u8FD4\u56DE)"
+      value: "\u662F\u7684\n(\u9F20\u6807\u70B9\u51FB)"
       objectReference: {fileID: 0}
     - target: {fileID: 2419946055386868539, guid: 68e759a52dde6e645b18b8b4e5430336, type: 3}
       propertyPath: m_FontData.m_Font

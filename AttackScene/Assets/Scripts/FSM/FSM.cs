@@ -25,6 +25,10 @@ public class Parameter
     public Collider2D collider;
     public Rigidbody2D rigidbody;
     public bool getHit;
+    public float jumpChaseCD;
+    public float jumpChaseDistance;
+    public float jumpSpeed;
+
 }
 public class FSM : MonoBehaviour
 {
