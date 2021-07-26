@@ -159,6 +159,7 @@ public class fireWormAction : MonoBehaviour
         if (isCritical)
         {
             gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255, 0, 0, 255);
+            //gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255, 0, 0, 0);
         }
         health.GetComponent<health>().callUpdateHealth();
 

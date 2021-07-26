@@ -68,6 +68,7 @@ public class NightMare2 : MonoBehaviour
         }
 
         gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(r,g, b, 255);
+        //gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(r,g, b, 0);
 
 
         //！！！可优化 把敌人的参数位置移动一下

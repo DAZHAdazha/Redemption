@@ -115,6 +115,7 @@ public class Bat : MonoBehaviour
         if (isCritical)
         {
             gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255, 0, 0, 255);
+            //gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255, 0, 0, 0);
         }
         hitAnimator.SetTrigger("Hit");
         //health.GetComponent<health>().callUpdateHealth();

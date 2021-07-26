@@ -50,6 +50,7 @@ public class Enemy : MonoBehaviour
         gb.transform.GetChild(0).GetComponent<TextMesh>().text = damage.ToString();
         if(isCritical){
             gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255,0,0,255);
+            //gb.transform.GetChild(0).GetComponent<TextMesh>().color = new Color(255,0,0,0);
         }
         
         //！！！可优化 把敌人的参数位置移动一下
