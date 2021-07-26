@@ -639,10 +639,10 @@ public class PlayerController : MonoBehaviour
     public void getDamage(float damage = 1f){
         PlayerSound.soundManagerInstance.hurtAudioPlay();
         //这里扣血！！！ 注意这里在player 的Hurt 动画时间 要大于 敌人防反帧的时间长度
-        if (!myShadow.getExist())
-        {
+        //if (!myShadow.getExist())
+        //{
             //screenFlash.FlashScreen();
-        }
+        //}
 
         StartCoroutine("showPlayerHitbox");
         myHealSystem.TakeDamage(damage);
